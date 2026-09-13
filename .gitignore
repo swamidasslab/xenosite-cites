@@ -25,3 +25,4 @@ artifacts/
 uv.lock
 .python-version
 .envrc
+src/xenosite/cites/_version.py

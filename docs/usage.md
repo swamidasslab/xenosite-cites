@@ -1,21 +1,14 @@
 # Usage
 
-Install in another project with uv (after it is published or via a git dependency):
-
-```bash
-uv add template-py-project
-```
-
-From a checkout:
-
 ```bash
 uv sync --group dev
 ```
 
 ```python
-from template_py_project import hello
+from xenosite.cites import load_seeds
 
-assert hello("lab") == "hello, lab"
+seeds = load_seeds()
+assert seeds[0].normalized_doi().startswith("10.")
 ```
 
-Public API is `hello` and `__version__`. Replace this module when you start a real package from the template.
+Edit `src/xenosite/cites/seeds.yaml` to add or retire seed papers. Keep bulk downloads and API caches under `artifacts/` (not committed).

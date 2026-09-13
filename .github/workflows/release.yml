@@ -21,10 +21,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: uv sync --group dev
       - name: Show package version
-        run: uv run python -c "import template_py_project as m; print(m.__version__)"
+        run: uv run python -c "import xenosite.cites as m; print(m.__version__)"
       - name: Require clean release version on tags
         run: |
-          ver=$(uv run python -c "import template_py_project as m; print(m.__version__)")
+          ver=$(uv run python -c "import xenosite.cites as m; print(m.__version__)")
           echo "version=$ver"
           case "$ver" in
             *dev*|*+*|*.d[0-9]*)

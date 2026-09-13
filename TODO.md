@@ -1,4 +1,5 @@
 # TODO
 
-- Rename placeholders when using this as a GitHub template
-- Enable PyPI Trusted Publishing only if this package should be published
+- Expand seed corpus beyond the three starter XenoSite papers
+- OpenAlex (or Semantic Scholar) citing-works fetch into `artifacts/`
+- Citation summary tables: counts, venues, years, self-citation

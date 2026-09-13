@@ -1,17 +1,14 @@
-# template-py-project
+# xenosite-cites
 
-Starter Python package for **swamidasslab** conventions: uv, `src/` layout, hatch-vcs, pytest (parallel, coverage, doctests, Hypothesis), Ruff, mypy, towncrier, and GitHub Actions.
+Systematic study of **citations to XenoSite papers**: seed corpus, citation retrieval, and analyses of who cites the work and how.
 
-## Start a new repo from this template
+Import package: `xenosite.cites` (PEP 420 namespace under `xenosite`).
 
-```bash
-cd ~/Workspaces
-gh repo create {org}/{name} --template swamidasslab/template-py-project --private --clone
-```
+## Goals
 
-Then rename `template-py-project` / `template_py_project` and the GitHub URLs in `pyproject.toml`. Org is **swamidass** or **swamidasslab**.
-
-This template is a **package** (no committed `uv.lock` / `.python-version`). For a production app, start from the template, then commit those pins and switch CI to `uv sync --frozen`.
+1. Curate the seed set of XenoSite / related papers (`seeds.yaml`).
+2. Pull citing works from bibliographic APIs (e.g. OpenAlex) into `artifacts/`.
+3. Summarize citation counts, venues, topics, and self- vs external citation patterns.
 
 ## Development
 
@@ -23,14 +20,19 @@ uv run ruff format --check
 uv run mypy src
 ```
 
-Version comes from git tags (`vX.Y.Z`). See [docs/release.md](docs/release.md). PyPI publishing is opt-in.
-
-## Usage
-
 ```python
-from template_py_project import hello
+from xenosite.cites import load_seeds
 
-hello()
+for paper in load_seeds():
+    print(paper.year, paper.doi, paper.title)
 ```
 
-More in [docs/usage.md](docs/usage.md).
+Version comes from git tags (`vX.Y.Z`). See [docs/release.md](docs/release.md).
+
+## Layout
+
+| Path | Role |
+|------|------|
+| `src/xenosite/cites/seeds.yaml` | Curated seed DOIs (tracked) |
+| `artifacts/` | Downloaded citation payloads (gitignored) |
+| `docs/usage.md` | Usage notes |

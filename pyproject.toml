@@ -3,9 +3,9 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "template-py-project"
+name = "xenosite-cites"
 dynamic = ["version"]
-description = "Starter Python package for swamidasslab conventions"
+description = "Systematic study of citations to XenoSite papers"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
@@ -19,13 +19,18 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
 ]
-dependencies = []
+dependencies = [
+    "pyyaml>=6.0",
+]
+keywords = ["xenosite", "citations", "bibliometrics", "openalex"]
 
 [project.urls]
-Homepage = "https://github.com/swamidasslab/template-py-project"
-Repository = "https://github.com/swamidasslab/template-py-project"
-Issues = "https://github.com/swamidasslab/template-py-project/issues"
+Homepage = "https://github.com/swamidasslab/xenosite-cites"
+Repository = "https://github.com/swamidasslab/xenosite-cites"
+Issues = "https://github.com/swamidasslab/xenosite-cites/issues"
 
 [dependency-groups]
 dev = [
@@ -36,6 +41,7 @@ dev = [
     "ruff>=0.6",
     "towncrier>=24.0",
     "mypy>=1.11",
+    "types-PyYAML>=6.0",
 ]
 
 [tool.hatch.version]
@@ -47,10 +53,10 @@ local_scheme = "node-and-date"
 fallback_version = "0.0.0"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/template_py_project/_version.py"
+version-file = "src/xenosite/cites/_version.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/template_py_project"]
+packages = ["src/xenosite"]
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules -n auto --cov --cov-report=term-missing --import-mode=importlib"
@@ -60,7 +66,7 @@ consider_namespace_packages = true
 doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
 
 [tool.coverage.run]
-source_pkgs = ["template_py_project"]
+source_pkgs = ["xenosite.cites"]
 parallel = true
 omit = ["*/_version.py"]
 
@@ -88,8 +94,8 @@ directory = "changelog.d"
 filename = "CHANGELOG.md"
 start_string = "<!-- towncrier release notes start -->\n"
 underlines = ["", "", ""]
-title_format = "## [{version}](https://github.com/swamidasslab/template-py-project/releases/tag/v{version}) - {project_date}"
-issue_format = "[#{issue}](https://github.com/swamidasslab/template-py-project/issues/{issue})"
+title_format = "## [{version}](https://github.com/swamidasslab/xenosite-cites/releases/tag/v{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/swamidasslab/xenosite-cites/issues/{issue})"
 
 [[tool.towncrier.type]]
 directory = "security"

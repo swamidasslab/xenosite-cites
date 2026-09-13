@@ -1,6 +1,7 @@
 # Lab log
 
-## 2026-09-09
+## 2026-09-13
 
-- Created this repo as the swamidasslab Python package template (`src/` layout, uv, hatch-vcs, no committed lockfile).
-- New projects should `gh repo create --template swamidasslab/template-py-project` rather than scaffolding by hand.
+- Initialized from `swamidasslab/template-py-project` as private `swamidasslab/xenosite-cites`.
+- Leaf package `xenosite.cites` with curated `seeds.yaml` (Zaretzki 2013, Matlock 2015 server, Hughes 2020 Metabolic Forest).
+- Next: finish seed corpus, then OpenAlex (or similar) citing-works fetch into `artifacts/`.

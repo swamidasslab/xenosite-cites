@@ -1,0 +1,20 @@
+# Curated XenoSite seed papers. Expand as the corpus is finalized.
+# Downloaded citation graphs and API payloads go under artifacts/ (gitignored).
+papers:
+  - id: zaretzki-2013-xenosite
+    doi: 10.1021/ci400518g
+    title: "XenoSite: Accurately Predicting CYP-Mediated Sites of Metabolism with Neural Networks"
+    year: 2013
+    notes: Foundational CYP SOM model paper.
+
+  - id: matlock-2015-xenosite-server
+    doi: 10.1093/bioinformatics/btu761
+    title: "XenoSite server: a web-available site of metabolism prediction tool"
+    year: 2015
+    notes: Web server companion to the CYP SOM models.
+
+  - id: hughes-2020-metabolic-forest
+    doi: 10.1021/acs.jcim.0c00360
+    title: "Metabolic Forest: Predicting the Diverse Structures of Drug Metabolites"
+    year: 2020
+    notes: Metabolic Forest / xenosite-forest preferred citation.
