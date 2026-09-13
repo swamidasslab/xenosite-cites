@@ -49,6 +49,8 @@ dev = [
 ]
 workflow = [
     "snakemake>=8.0",
+    "matplotlib>=3.8",
+    "scikit-learn>=1.4",
 ]
 
 [tool.hatch.version]
