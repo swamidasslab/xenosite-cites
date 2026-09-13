@@ -152,7 +152,7 @@ class OpenAlexClient:
     ) -> Iterator[dict[str, Any]]:
         """Yield works that cite ``openalex_id`` (full OpenAlex URL or short id)."""
         short = openalex_id.rstrip("/").split("/")[-1]
-        cursor = "*"
+        cursor: str | None = "*"
         while cursor:
             data = self._get(
                 "/works",
@@ -165,4 +165,5 @@ class OpenAlexClient:
             for work in data.get("results") or []:
                 if isinstance(work, dict):
                     yield work
-            cursor = (data.get("meta") or {}).get("next_cursor")
+            next_cursor = (data.get("meta") or {}).get("next_cursor")
+            cursor = next_cursor if isinstance(next_cursor, str) and next_cursor else None

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from argparse import Namespace
 from pathlib import Path
 
 from xenosite.cites.cli import cmd_build_graph
@@ -67,13 +68,14 @@ def test_build_graph_merges_multi_seed_citers(tmp_path: Path) -> None:
     citing_b["cites_seed_doi"] = "10.1/b"
     (citing_dir / "b.jsonl").write_text(json.dumps(citing_b) + "\n", encoding="utf-8")
 
-    class Args:
-        seed_json = [str(seeds_dir / "a.json"), str(seeds_dir / "b.json")]
-        citing_jsonl = [str(citing_dir / "a.jsonl"), str(citing_dir / "b.jsonl")]
-        out_dir = str(out_dir)
-        summary_copy = str(tmp_path / "summary.json")
-
-    cmd_build_graph(Args())
+    cmd_build_graph(
+        Namespace(
+            seed_json=[str(seeds_dir / "a.json"), str(seeds_dir / "b.json")],
+            citing_jsonl=[str(citing_dir / "a.jsonl"), str(citing_dir / "b.jsonl")],
+            out_dir=str(out_dir),
+            summary_copy=str(tmp_path / "summary.json"),
+        )
+    )
     summary = json.loads((out_dir / "summary.json").read_text(encoding="utf-8"))
     assert summary["n_seeds"] == 2
     assert summary["n_edges"] == 2
