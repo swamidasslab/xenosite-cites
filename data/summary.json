@@ -1,0 +1,28 @@
+{
+  "citations_per_seed": {
+    "dang-2016-ugt": 85,
+    "dang-2017-casa": 42,
+    "dang-2018-n-dealkylation": 55,
+    "dang-2020-metabolic-rainbow": 67,
+    "flynn-2020-xenonet": 20,
+    "flynn-2023-mpnn-authenticity": 9,
+    "hughes-2015-epoxidation": 203,
+    "hughes-2015-gsh-reactivity": 104,
+    "hughes-2016-macromolecule-reactivity": 105,
+    "hughes-2017-quinone": 82,
+    "hughes-2020-metabolic-forest": 19,
+    "hughes-2021-bioactivation": 24,
+    "matlock-2015-xenosite-server": 102,
+    "matlock-2018-promiscuous-reactivity": 43,
+    "zaretzki-2012-rs-webpredictor": 68,
+    "zaretzki-2013-xenosite": 224,
+    "zaretzki-2015-xenosite-regions": 16
+  },
+  "n_citing_papers": 777,
+  "n_citing_papers_multi_seed": 201,
+  "n_edges": 1268,
+  "n_papers": 794,
+  "n_seeds": 17,
+  "papers_with_abstract": 566,
+  "papers_with_doi": 790
+}
