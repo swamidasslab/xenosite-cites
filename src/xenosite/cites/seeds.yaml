@@ -1,20 +1,132 @@
-# Curated XenoSite seed papers. Expand as the corpus is finalized.
-# Downloaded citation graphs and API payloads go under artifacts/ (gitignored).
+# Curated XenoSite-family seed papers (methods / tools / named products).
+# Sources: xenosite.org cite blocks, OpenAlex Swamidass works, lab CITATION.cff.
+# Citation payloads live under artifacts/ (gitignored).
+#
+# tags: product or method family labels used in filtering later.
+
 papers:
+  # --- CYP SOM lineage ---
+  - id: zaretzki-2012-rs-webpredictor
+    doi: 10.1093/bioinformatics/bts705
+    title: "RS-WebPredictor: a server for predicting CYP-mediated sites of metabolism on drug-like molecules"
+    year: 2012
+    tags: [som, server, predecessor]
+    notes: Pre-XenoSite RS-Predictor web server.
+
   - id: zaretzki-2013-xenosite
     doi: 10.1021/ci400518g
     title: "XenoSite: Accurately Predicting CYP-Mediated Sites of Metabolism with Neural Networks"
     year: 2013
-    notes: Foundational CYP SOM model paper.
+    tags: [xenosite, som, cyp]
+    notes: Foundational CYP SOM neural-network paper.
 
   - id: matlock-2015-xenosite-server
     doi: 10.1093/bioinformatics/btu761
     title: "XenoSite server: a web-available site of metabolism prediction tool"
     year: 2015
+    tags: [xenosite, som, server]
     notes: Web server companion to the CYP SOM models.
+
+  - id: zaretzki-2015-xenosite-regions
+    doi: 10.1093/bioinformatics/btv100
+    title: "Extending P450 site-of-metabolism models with region-resolution data"
+    year: 2015
+    tags: [xenosite, som, regions]
+    notes: Region-resolution extension of P450 SOM models (XenoSite Regions).
+
+  # --- Reactivity / SOR ---
+  - id: hughes-2015-gsh-reactivity
+    doi: 10.1021/acs.chemrestox.5b00017
+    title: "Site of Reactivity Models Predict Molecular Reactivity of Diverse Chemicals with Glutathione"
+    year: 2015
+    tags: [xenosite, reactivity, gsh]
+    notes: GSH site-of-reactivity models; cited on xenosite.org/reactivity.
+
+  - id: hughes-2016-macromolecule-reactivity
+    doi: 10.1021/acscentsci.6b00162
+    title: "Modeling Reactivity to Biological Macromolecules with a Deep Multitask Network"
+    year: 2016
+    tags: [xenosite, reactivity, dna, protein]
+    notes: DNA/protein multitask reactivity; cited on xenosite.org/reactivity.
+
+  - id: matlock-2018-promiscuous-reactivity
+    doi: 10.1021/acs.jcim.8b00104
+    title: "Modeling Small-Molecule Reactivity Identifies Promiscuous Bioactive Compounds"
+    year: 2018
+    tags: [xenosite, reactivity]
+    notes: Reactivity modeling for promiscuous bioactives.
+
+  # --- Epoxidation / quinonation / N-dealkylation ---
+  - id: hughes-2015-epoxidation
+    doi: 10.1021/acscentsci.5b00131
+    title: "Modeling Epoxidation of Drug-like Molecules with a Deep Machine Learning Network"
+    year: 2015
+    tags: [xenosite, epoxidation]
+    notes: Site-of-epoxidation model; cited on xenosite.org.
+
+  - id: hughes-2017-quinone
+    doi: 10.1021/acs.chemrestox.6b00385
+    title: "Deep Learning to Predict the Formation of Quinone Species in Drug Metabolism"
+    year: 2017
+    tags: [xenosite, quinone]
+    notes: Quinone / quinone-imine formation; cited on xenosite.org.
+
+  - id: dang-2018-n-dealkylation
+    doi: 10.1021/acs.chemrestox.7b00191
+    title: "Computationally Assessing the Bioactivation of Drugs by N-Dealkylation"
+    year: 2018
+    tags: [xenosite, n-dealkylation]
+    notes: N-dealkylation bioactivation; cited on xenosite.org.
+
+  # --- Structural alerts (CASA) ---
+  - id: dang-2017-casa
+    doi: 10.1021/acs.chemrestox.6b00336
+    title: "Computational Approach to Structural Alerts: Furans, Phenols, Nitroaromatics, and Thiophenes"
+    year: 2017
+    tags: [casa, structural-alerts, xenosite]
+    notes: CASA — computational approach to structural alerts.
+
+  # --- Phase II / UGT ---
+  - id: dang-2016-ugt
+    doi: 10.1093/bioinformatics/btw350
+    title: "A simple model predicts UGT-mediated metabolism"
+    year: 2016
+    tags: [xenosite, ugt]
+    notes: UGT SOM model; cited on xenosite.org.
+
+  # --- Rainbow / Forest / Net ---
+  - id: dang-2020-metabolic-rainbow
+    doi: 10.1021/acs.jcim.9b00836
+    title: "The Metabolic Rainbow: Deep Learning Phase I Metabolism in Five Colors"
+    year: 2020
+    tags: [xenosite, rainbow, phase1, som]
+    notes: Rainbow XenoSite phase-I reaction-class SOM; cited on xenosite.org/phase1.
 
   - id: hughes-2020-metabolic-forest
     doi: 10.1021/acs.jcim.0c00360
     title: "Metabolic Forest: Predicting the Diverse Structures of Drug Metabolites"
     year: 2020
+    tags: [metabolic-forest, metabolite-structure]
     notes: Metabolic Forest / xenosite-forest preferred citation.
+
+  - id: flynn-2020-xenonet
+    doi: 10.1021/acs.jcim.0c00361
+    title: "XenoNet: Inference and Likelihood of Intermediate Metabolite Formation"
+    year: 2020
+    tags: [xenonet, metabolite-pathway]
+    notes: Pathway / intermediate metabolite inference with Metabolic Forest + Rainbow.
+
+  # --- Combined bioactivation / authenticity ---
+  - id: hughes-2021-bioactivation
+    doi: 10.1021/acs.chemrestox.0c00417
+    title: "Modeling the Bioactivation and Subsequent Reactivity of Drugs"
+    year: 2021
+    tags: [xenosite, bioactivation, reactivity]
+    notes: Combined metabolism + reactivity bioactivation modeling.
+
+  - id: flynn-2023-mpnn-authenticity
+    doi: 10.1021/acs.jcim.2c01383
+    title: "Message Passing Neural Networks Improve Prediction of Metabolite Authenticity"
+    year: 2023
+    tags: [xenonet, metabolite-authenticity, gnn]
+    notes: MPNN metabolite authenticity (XenoNet-related follow-on).
