@@ -7,13 +7,13 @@
     "unknown": 136
   },
   "n_citing": 777,
-  "n_predict_then_test_high_medium": 18,
+  "n_predict_then_test_high_medium": 56,
   "n_topic_docs": 747,
   "pre_2012_citing": 3,
   "predict_then_test_counts": {
-    "high": 17,
-    "low": 50,
-    "medium": 1
+    "high": 25,
+    "low": 149,
+    "medium": 31
   },
   "reconstruction_error": 25.931936569364453,
   "topics": [
