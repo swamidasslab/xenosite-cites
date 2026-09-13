@@ -1,5 +1,5 @@
 # TODO
 
-- Expand seed corpus beyond the three starter XenoSite papers
-- OpenAlex (or Semantic Scholar) citing-works fetch into `artifacts/`
-- Citation summary tables: counts, venues, years, self-citation
+- Analyze citation graph (venues, years, multi-seed citers, self-citation)
+- Optional: enrich citing papers with full reference lists beyond seed hits
+- Decide whether to add experimental bioactivation case studies to the seed set

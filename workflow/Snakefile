@@ -1,0 +1,57 @@
+# Citation graph build for XenoSite seed papers via OpenAlex.
+# Run from repo root:
+#   uv sync --group workflow --group dev
+#   uv run snakemake -c1 -s workflow/Snakefile
+
+from pathlib import Path
+
+import yaml
+
+SEEDS_YAML = Path("src/xenosite/cites/seeds.yaml")
+SEED_IDS = [p["id"] for p in yaml.safe_load(SEEDS_YAML.read_text(encoding="utf-8"))["papers"]]
+ART = Path("artifacts")
+
+
+rule all:
+    input:
+        ART / "graph" / "summary.json",
+        ART / "graph" / "papers.jsonl",
+        ART / "graph" / "edges.jsonl",
+        "data/summary.json",
+
+
+rule resolve_seed:
+    output:
+        ART / "openalex" / "seeds" / "{seed_id}.json",
+    params:
+        seed_id=lambda wildcards: wildcards.seed_id,
+    shell:
+        "uv run python -m xenosite.cites.cli resolve-seed "
+        "--seed-id {params.seed_id} --output {output}"
+
+
+rule fetch_citing:
+    input:
+        ART / "openalex" / "seeds" / "{seed_id}.json",
+    output:
+        ART / "openalex" / "citing" / "{seed_id}.jsonl",
+    shell:
+        "uv run python -m xenosite.cites.cli fetch-citing "
+        "--seed-json {input} --output {output}"
+
+
+rule build_graph:
+    input:
+        seeds=expand(str(ART / "openalex" / "seeds" / "{seed_id}.json"), seed_id=SEED_IDS),
+        citing=expand(str(ART / "openalex" / "citing" / "{seed_id}.jsonl"), seed_id=SEED_IDS),
+    output:
+        summary=ART / "graph" / "summary.json",
+        papers=ART / "graph" / "papers.jsonl",
+        edges=ART / "graph" / "edges.jsonl",
+        summary_copy="data/summary.json",
+    shell:
+        "uv run python -m xenosite.cites.cli build-graph "
+        "--seed-json {input.seeds} "
+        "--citing-jsonl {input.citing} "
+        "--out-dir artifacts/graph "
+        "--summary-copy {output.summary_copy}"
