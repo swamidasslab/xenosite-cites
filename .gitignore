@@ -22,6 +22,7 @@ coverage.xml
 .direnv/
 .DS_Store
 artifacts/
+.snakemake/
 uv.lock
 .python-version
 .envrc
