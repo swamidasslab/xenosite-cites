@@ -1,14 +1,14 @@
 # Citing-paper analysis
 
 - Citing papers: **777**
-- Class counts: {'computational': 245, 'experimental': 120, 'mixed': 230, 'review': 46, 'unknown': 136}
+- Class counts: {'computational': 245, 'experimental': 350, 'review': 46, 'unknown': 136}
 - Predict-then-test (XenoSite use → experiment): {'high': 25, 'low': 149, 'medium': 31} (high+medium=56)
 - Topic model docs: **747** across **8** NMF topics
 - Pre-2012 citing records (likely metadata noise): **3**
 
 ## Classes
 
-Heuristic labels from OpenAlex `type` plus title/abstract keywords (`review` / `computational` / `experimental` / `mixed` / `unknown`). Mixed means both computational and experimental cues appear.
+Heuristic labels from OpenAlex `type` plus title/abstract keywords (`review` / `experimental` = any wet-lab cue / `computational` = computation-only / `unknown`).
 
 ## Predict-then-test
 

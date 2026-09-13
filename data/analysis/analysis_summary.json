@@ -1,8 +1,7 @@
 {
   "class_counts": {
     "computational": 245,
-    "experimental": 120,
-    "mixed": 230,
+    "experimental": 350,
     "review": 46,
     "unknown": 136
   },
