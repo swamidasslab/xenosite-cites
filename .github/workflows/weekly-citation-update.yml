@@ -1,0 +1,52 @@
+name: weekly-citation-update
+
+on:
+  schedule:
+    # Mondays 14:00 UTC
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+    inputs:
+      full_refresh:
+        description: "Full citing refetch (ignore since/manifest)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-citation-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: uv sync --group workflow --group dev
+
+      - name: Update citations and analyze
+        env:
+          OPENALEX_MAILTO: swamidass@gmail.com
+          FULL_REFRESH: ${{ inputs.full_refresh && '1' || '0' }}
+        run: bash scripts/update_and_analyze.sh
+
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A artifacts data docs/figures
+          if git diff --cached --quiet; then
+            echo "No citation/analysis changes to commit"
+            exit 0
+          fi
+          git commit -m "Weekly OpenAlex citation update and analysis refresh."
+          git push

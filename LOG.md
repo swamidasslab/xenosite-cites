@@ -2,6 +2,11 @@
 
 ## 2026-09-13
 
+- Incremental update (`update-citations`): preserve citing jsonl order, append new IDs only, skip file write if bytes unchanged; skip `cited_by_count` churn unless `--update-volatile` / `--full`.
+- Track `artifacts/openalex` (+ graph) in git; weekly Action `weekly-citation-update.yml` runs `scripts/update_and_analyze.sh` and commits.
+
+## 2026-09-13
+
 - Class rule changed: any wet-lab cue → `experimental`; `computational` is computation-only (dropped `mixed`). Recount: experimental 350, computational 245, review 46, unknown 136.
 - Predict-then-test: infer XenoSite use from seed citation + metabolism + computational/experimental pairing so lab terbinafine papers (2018/2019) rank high without naming the tool in abstracts.
 - Recent citation pace ~1.5–2 citing papers/week (2025–2026). Top recent seeds: epoxidation 2015, XenoSite 2013, Metabolic Rainbow 2020; Rainbow share up vs 2021–2023, XenoSite 2013 share down.

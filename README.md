@@ -19,18 +19,33 @@ uv run snakemake -c1 -s workflow/Snakefile
 
 Analysis (class labels, NMF topics, figures) is included in that DAG. Figures land in `docs/figures/`; a short write-up is in `data/analysis/analysis_report.md`.
 
+### Incremental updates
+
+OpenAlex citing payloads under `artifacts/openalex/` are **tracked in git**. Refresh without a full refetch:
+
+```bash
+# Uses update_manifest.json (minus 14-day overlap); appends new rows; rewrites
+# existing rows only when bibliographic fields improve. Citation counts are
+# left alone unless --update-volatile or --full.
+uv run xenosite-cites update-citations
+
+# Then rebuild graph + analysis (or use the helper):
+bash scripts/update_and_analyze.sh
+```
+
+A weekly GitHub Action (`.github/workflows/weekly-citation-update.yml`) runs the same helper and commits changes.
+
 Outputs:
 
 | Path | Role |
 |------|------|
 | `artifacts/openalex/seeds/{id}.json` | Resolved seed works |
 | `artifacts/openalex/citing/{id}.jsonl` | Papers citing each seed (abstract + bib + `referenced_works`) |
+| `artifacts/openalex/update_manifest.json` | Last incremental update metadata |
 | `artifacts/graph/papers.jsonl` | Deduplicated paper nodes |
 | `artifacts/graph/edges.jsonl` | Citing → seed edges |
 | `artifacts/graph/summary.json` | Counts |
 | `data/summary.json` | Same summary, tracked in git |
-
-Bulk OpenAlex payloads stay under `artifacts/` (gitignored). Re-run Snakemake to refresh.
 
 ## Development
 

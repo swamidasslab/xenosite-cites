@@ -4,3 +4,4 @@
 - Optional full-text pass for XenoSite use not named in abstracts
 - Optional: enrich citing papers with full reference lists beyond seed hits
 - Decide whether lab application papers (terbinafine, meclofenamate) belong in the seed set
+- First weekly Action run: confirm OpenAlex polite-pool mailto + commit permissions on private repo
