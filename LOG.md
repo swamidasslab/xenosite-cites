@@ -2,6 +2,10 @@
 
 ## 2026-09-13
 
+- Ran `uv run snakemake -c1 -s workflow/Snakefile`: 17 seeds → 777 citing papers, 1268 edges; 566/794 papers have abstracts; 201 multi-seed citers. Summary in `data/summary.json`; full payloads under `artifacts/`.
+
+## 2026-09-13
+
 - Expanded seeds to 17 XenoSite-family method papers (XenoSite, CASA, Rainbow, Forest, XenoNet, reactivity/epoxidation/quinone/UGT/N-dealkylation, etc.). CASA mapped to Dang 2017 structural alerts (`10.1021/acs.chemrestox.6b00336`).
 - Added OpenAlex client + Snakemake workflow (`workflow/Snakefile`) to resolve seeds, fetch citing works (abstract + bib + referenced_works), and build `papers.jsonl` / `edges.jsonl`.
 - Bulk payloads under `artifacts/` (gitignored); `data/summary.json` committed after graph builds.
