@@ -7,4 +7,4 @@ except ImportError:  # pragma: no cover - missing only in incomplete checkouts
 
 from .seeds import SeedPaper, load_seeds
 
-__all__ = ["__version__", "SeedPaper", "load_seeds"]
+__all__ = ["SeedPaper", "__version__", "load_seeds"]
