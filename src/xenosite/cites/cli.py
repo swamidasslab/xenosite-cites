@@ -142,6 +142,135 @@ def cmd_build_graph(args: argparse.Namespace) -> None:
         _write_json(Path(args.summary_copy), summary)
 
 
+def cmd_analyze(args: argparse.Namespace) -> None:
+    from collections import Counter
+
+    from xenosite.cites import plots
+    from xenosite.cites.classify import classify_paper
+    from xenosite.cites.topics import fit_topics
+
+    papers_path = Path(args.papers)
+    summary_path = Path(args.summary)
+    out_dir = Path(args.out_dir)
+    fig_dir = Path(args.figures_dir)
+    data_dir = Path(args.data_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    fig_dir.mkdir(parents=True, exist_ok=True)
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    papers = [
+        json.loads(line)
+        for line in papers_path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    citing = [p for p in papers if not p.get("is_seed")]
+
+    classifications: list[dict[str, Any]] = []
+    label_by_id: dict[str, str] = {}
+    for paper in citing:
+        result = classify_paper(paper)
+        oid = str(paper.get("openalex_id") or "")
+        label_by_id[oid] = result["label"]
+        classifications.append(
+            {
+                "openalex_id": oid,
+                "doi": paper.get("doi"),
+                "title": paper.get("title"),
+                "year": paper.get("year"),
+                "venue": paper.get("venue"),
+                **result,
+            }
+        )
+
+    topic_fit = fit_topics(citing, n_topics=args.n_topics)
+    topic_by_id = {a["openalex_id"]: a for a in topic_fit.get("assignments") or []}
+    for row in classifications:
+        assignment = topic_by_id.get(row["openalex_id"])
+        if assignment:
+            row["topic_id"] = assignment["topic_id"]
+            row["topic_weight"] = assignment["topic_weight"]
+        else:
+            row["topic_id"] = None
+            row["topic_weight"] = None
+
+    class_counts = Counter(r["label"] for r in classifications)
+    analysis_summary = {
+        "n_citing": len(citing),
+        "class_counts": dict(sorted(class_counts.items())),
+        "topics": topic_fit.get("topics") or [],
+        "n_topic_docs": topic_fit.get("n_docs"),
+        "reconstruction_error": topic_fit.get("reconstruction_error"),
+        "pre_2012_citing": sum(
+            1 for p in citing if isinstance(p.get("year"), int) and p["year"] < 2012
+        ),
+    }
+
+    _write_jsonl(out_dir / "classifications.jsonl", classifications)
+    _write_json(out_dir / "topics.json", topic_fit)
+    _write_json(out_dir / "analysis_summary.json", analysis_summary)
+    _write_json(data_dir / "analysis_summary.json", analysis_summary)
+    _write_json(data_dir / "topics.json", {"topics": topic_fit.get("topics") or []})
+
+    labels = [r["label"] for r in classifications]
+    plots.plot_citations_by_year(papers, fig_dir / "citations_by_year.png")
+    plots.plot_top_venues(papers, fig_dir / "top_venues.png")
+    plots.plot_citations_per_seed(summary, fig_dir / "citations_per_seed.png")
+    plots.plot_class_counts(labels, fig_dir / "class_counts.png")
+    plots.plot_class_by_year(papers, label_by_id, fig_dir / "class_by_year.png")
+    plots.plot_topic_sizes(topic_fit.get("topics") or [], fig_dir / "topic_sizes.png")
+
+    # Also copy figures into artifacts for the full run tree.
+    art_fig = out_dir / "figures"
+    art_fig.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "citations_by_year.png",
+        "top_venues.png",
+        "citations_per_seed.png",
+        "class_counts.png",
+        "class_by_year.png",
+        "topic_sizes.png",
+    ):
+        src = fig_dir / name
+        if src.exists():
+            (art_fig / name).write_bytes(src.read_bytes())
+
+    report_lines = [
+        "# Citing-paper analysis",
+        "",
+        f"- Citing papers: **{len(citing)}**",
+        f"- Class counts: {dict(sorted(class_counts.items()))}",
+        f"- Topic model docs: **{topic_fit.get('n_docs')}** across "
+        f"**{topic_fit.get('n_topics')}** NMF topics",
+        f"- Pre-2012 citing records (likely metadata noise): "
+        f"**{analysis_summary['pre_2012_citing']}**",
+        "",
+        "## Classes",
+        "",
+        "Heuristic labels from OpenAlex `type` plus title/abstract keywords "
+        "(`review` / `computational` / `experimental` / `mixed` / `unknown`). "
+        "Mixed means both computational and experimental cues appear.",
+        "",
+        "## Topics",
+        "",
+    ]
+    for topic in topic_fit.get("topics") or []:
+        kws = ", ".join(topic["keywords"][:8])
+        report_lines.append(f"- **T{topic['topic_id']}** (n={topic['n_papers']}): {kws}")
+    report_lines.extend(
+        [
+            "",
+            "## Figures",
+            "",
+            "See `docs/figures/` (committed) and `artifacts/analysis/figures/`.",
+            "",
+        ]
+    )
+    report = "\n".join(report_lines) + "\n"
+    (data_dir / "analysis_report.md").write_text(report, encoding="utf-8")
+    (out_dir / "analysis_report.md").write_text(report, encoding="utf-8")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="xenosite-cites")
     parser.add_argument("--mailto", default="swamidass@gmail.com")
@@ -163,6 +292,18 @@ def build_parser() -> argparse.ArgumentParser:
     graph.add_argument("--out-dir", required=True)
     graph.add_argument("--summary-copy", default=None)
     graph.set_defaults(func=cmd_build_graph)
+
+    analyze = sub.add_parser(
+        "analyze",
+        help="Classify citing papers, fit topics, and write figures",
+    )
+    analyze.add_argument("--papers", default="artifacts/graph/papers.jsonl")
+    analyze.add_argument("--summary", default="artifacts/graph/summary.json")
+    analyze.add_argument("--out-dir", default="artifacts/analysis")
+    analyze.add_argument("--figures-dir", default="docs/figures")
+    analyze.add_argument("--data-dir", default="data/analysis")
+    analyze.add_argument("--n-topics", type=int, default=8)
+    analyze.set_defaults(func=cmd_analyze)
 
     return parser
 

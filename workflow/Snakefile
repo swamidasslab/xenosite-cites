@@ -18,6 +18,9 @@ rule all:
         ART / "graph" / "papers.jsonl",
         ART / "graph" / "edges.jsonl",
         "data/summary.json",
+        ART / "analysis" / "analysis_summary.json",
+        "data/analysis/analysis_report.md",
+        "docs/figures/citations_by_year.png",
 
 
 rule resolve_seed:
@@ -55,3 +58,30 @@ rule build_graph:
         "--citing-jsonl {input.citing} "
         "--out-dir artifacts/graph "
         "--summary-copy {output.summary_copy}"
+
+
+rule analyze:
+    input:
+        papers=ART / "graph" / "papers.jsonl",
+        summary=ART / "graph" / "summary.json",
+    output:
+        ART / "analysis" / "analysis_summary.json",
+        ART / "analysis" / "topics.json",
+        ART / "analysis" / "classifications.jsonl",
+        ART / "analysis" / "analysis_report.md",
+        "data/analysis/analysis_summary.json",
+        "data/analysis/topics.json",
+        "data/analysis/analysis_report.md",
+        "docs/figures/citations_by_year.png",
+        "docs/figures/top_venues.png",
+        "docs/figures/citations_per_seed.png",
+        "docs/figures/class_counts.png",
+        "docs/figures/class_by_year.png",
+        "docs/figures/topic_sizes.png",
+    shell:
+        "uv run python -m xenosite.cites.cli analyze "
+        "--papers {input.papers} "
+        "--summary {input.summary} "
+        "--out-dir artifacts/analysis "
+        "--figures-dir docs/figures "
+        "--data-dir data/analysis"
