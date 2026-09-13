@@ -1,0 +1,103 @@
+# Tag-gated GitHub Release. No PyPI job until explicitly requested.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: uv sync --group dev
+      - name: Show package version
+        run: uv run python -c "import template_py_project as m; print(m.__version__)"
+      - name: Require clean release version on tags
+        run: |
+          ver=$(uv run python -c "import template_py_project as m; print(m.__version__)")
+          echo "version=$ver"
+          case "$ver" in
+            *dev*|*+*|*.d[0-9]*)
+              echo "Tagged builds must resolve to a clean X.Y.Z (got $ver)"
+              exit 1
+              ;;
+          esac
+      - run: uv run ruff check
+      - run: uv run ruff format --check
+      - run: uv run mypy src
+      - run: uv run pytest
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Version without v prefix
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+      - name: Compile CHANGELOG.md from towncrier fragments
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          VERSION="${{ steps.ver.outputs.version }}"
+          if grep -Eq "^## \[${VERSION}\]" CHANGELOG.md; then
+            echo "CHANGELOG.md already has [${VERSION}]"
+          else
+            uvx towncrier build --yes --version "$VERSION"
+          fi
+          git add CHANGELOG.md changelog.d
+          if git diff --cached --quiet; then
+            echo "No changelog changes to commit"
+            exit 0
+          fi
+          git commit -m "Update CHANGELOG.md for ${GITHUB_REF_NAME}."
+          git push origin "HEAD:refs/heads/${{ github.event.repository.default_branch }}" || \
+            echo "::warning::Could not fast-forward default branch with CHANGELOG.md."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: changelog
+          path: CHANGELOG.md
+
+  github-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: actions/download-artifact@v4
+        with:
+          name: changelog
+          path: .
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          fail_on_unmatched_files: true
+          generate_release_notes: true
