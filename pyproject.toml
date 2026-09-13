@@ -84,11 +84,15 @@ skip_empty = true
 show_missing = true
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 mypy_path = "src"
 explicit_package_bases = true
 namespace_packages = true
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["matplotlib.*", "sklearn.*", "numpy.*"]
+follow_imports = "skip"
 
 [tool.ruff]
 line-length = 100

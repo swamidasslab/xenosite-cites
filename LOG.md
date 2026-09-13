@@ -3,6 +3,7 @@
 ## 2026-09-13
 
 - Ran `uv run snakemake -c1 -s workflow/Snakefile`: 17 seeds → 777 citing papers, 1268 edges; 566/794 papers have abstracts; 201 multi-seed citers. Summary in `data/summary.json`; full payloads under `artifacts/`.
+- Analysis: heuristic classes on 777 citers (computational 245, mixed 230, experimental 120, review 46, unknown 136); 8 NMF topics; figures in docs/figures/.
 
 ## 2026-09-13
 

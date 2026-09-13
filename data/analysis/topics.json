@@ -1,0 +1,148 @@
+{
+  "topics": [
+    {
+      "keywords": [
+        "metabolism",
+        "prediction",
+        "models",
+        "som",
+        "p450",
+        "drug",
+        "cyp",
+        "site",
+        "metabolism prediction",
+        "metabolic",
+        "model",
+        "sites"
+      ],
+      "n_papers": 100,
+      "topic_id": 0
+    },
+    {
+      "keywords": [
+        "deep",
+        "deep learning",
+        "neural",
+        "learning",
+        "networks",
+        "network",
+        "neural networks",
+        "neural network",
+        "deep neural",
+        "data",
+        "chemical",
+        "models"
+      ],
+      "n_papers": 80,
+      "topic_id": 1
+    },
+    {
+      "keywords": [
+        "molecular",
+        "docking",
+        "molecular docking",
+        "compounds",
+        "binding",
+        "potential",
+        "study",
+        "simulations",
+        "inhibitors",
+        "dynamics",
+        "protein",
+        "admet"
+      ],
+      "n_papers": 117,
+      "topic_id": 2
+    },
+    {
+      "keywords": [
+        "drug",
+        "discovery",
+        "ai",
+        "drug discovery",
+        "artificial",
+        "intelligence",
+        "artificial intelligence",
+        "design",
+        "drug design",
+        "development",
+        "data",
+        "review"
+      ],
+      "n_papers": 81,
+      "topic_id": 3
+    },
+    {
+      "keywords": [
+        "metabolites",
+        "ms",
+        "vitro",
+        "mass",
+        "vivo",
+        "mass spectrometry",
+        "spectrometry",
+        "reactive",
+        "phase",
+        "ms ms",
+        "identification",
+        "rat"
+      ],
+      "n_papers": 80,
+      "topic_id": 4
+    },
+    {
+      "keywords": [
+        "activity",
+        "synthesis",
+        "cell",
+        "cells",
+        "anticancer",
+        "derivatives",
+        "compounds",
+        "cancer",
+        "novel",
+        "sq109",
+        "structure",
+        "anticancer activity"
+      ],
+      "n_papers": 188,
+      "topic_id": 5
+    },
+    {
+      "keywords": [
+        "learning",
+        "machine",
+        "machine learning",
+        "small",
+        "ml",
+        "prediction",
+        "quantum",
+        "molecules",
+        "models",
+        "chemistry",
+        "small molecule",
+        "small molecules"
+      ],
+      "n_papers": 64,
+      "topic_id": 6
+    },
+    {
+      "keywords": [
+        "adme",
+        "adme profile",
+        "silico",
+        "profile",
+        "forensic",
+        "excretion",
+        "metabolism excretion",
+        "cas",
+        "distribution",
+        "absorption",
+        "distribution metabolism",
+        "absorption distribution"
+      ],
+      "n_papers": 37,
+      "topic_id": 7
+    }
+  ]
+}

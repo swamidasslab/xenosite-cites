@@ -17,6 +17,8 @@ uv sync --group workflow --group dev
 uv run snakemake -c1 -s workflow/Snakefile
 ```
 
+Analysis (class labels, NMF topics, figures) is included in that DAG. Figures land in `docs/figures/`; a short write-up is in `data/analysis/analysis_report.md`.
+
 Outputs:
 
 | Path | Role |
