@@ -70,21 +70,20 @@ def plot_citations_per_seed(summary: dict[str, Any], path: Path) -> None:
 
 
 def plot_class_counts(labels: list[str], path: Path) -> None:
-    order = ["computational", "experimental", "mixed", "review", "unknown"]
+    order = ["experimental", "computational", "review", "unknown"]
     counts = Counter(labels)
     xs = [k for k in order if counts.get(k)]
     ys = [counts[k] for k in xs]
     colors = {
         "computational": "#2c6e8a",
         "experimental": "#8a4b2c",
-        "mixed": "#6b5b95",
         "review": "#3d7a5c",
         "unknown": "#888888",
     }
     fig, ax = plt.subplots(figsize=(7, 4))
     ax.bar(xs, ys, color=[colors.get(x, "#444") for x in xs])
     ax.set_ylabel("Citing papers")
-    ax.set_title("Heuristic paper class (title/abstract/OpenAlex type)")
+    ax.set_title("Paper class (wet-lab if any; else computation-only)")
     ax.tick_params(axis="x", rotation=20)
     fig.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,7 +98,7 @@ def plot_class_by_year(
     *,
     min_year: int = 2012,
 ) -> None:
-    classes = ["computational", "experimental", "mixed", "review", "unknown"]
+    classes = ["experimental", "computational", "review", "unknown"]
     year_class: dict[int, Counter[str]] = {}
     for paper in _citing(papers):
         year = paper.get("year")
@@ -112,9 +111,8 @@ def plot_class_by_year(
     fig, ax = plt.subplots(figsize=(9, 4.5))
     bottoms = [0] * len(years)
     palette = {
-        "computational": "#2c6e8a",
         "experimental": "#8a4b2c",
-        "mixed": "#6b5b95",
+        "computational": "#2c6e8a",
         "review": "#3d7a5c",
         "unknown": "#bbbbbb",
     }

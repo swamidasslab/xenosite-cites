@@ -1,4 +1,4 @@
-"""Heuristic labels: experimental vs computational vs review."""
+"""Heuristic labels: wet-lab vs computation-only vs review."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ _COMP_PAT = re.compile(
     r"in\s*silico|computational|cheminformat\w*|qsar|qspr|machine\s*learning|"
     r"deep\s*learning|neural\s*network|docking|virtual\s*screen\w*|"
     r"molecular\s*dynam\w*|simulation|predict\w*\s+model|graph\s*neural|"
-    r"descriptor|fingerprint|algorithm|software|web\s*server|openalex|"
+    r"descriptor|fingerprint|algorithm|software|web\s*server|"
     r"artificial\s*intelligence|\bai\b|transformer|random\s*forest|"
     r"support\s*vector|ligand[- ]based|structure[- ]based"
     r")\b",
@@ -45,8 +45,11 @@ def _text(paper: dict[str, Any]) -> str:
 def classify_paper(paper: dict[str, Any]) -> dict[str, Any]:
     """Return label and evidence scores for one paper.
 
-    Labels: ``review``, ``computational``, ``experimental``, ``mixed``, ``unknown``.
-    OpenAlex ``type`` is used as a strong prior for reviews.
+    Labels:
+    - ``review``: OpenAlex/title review signal (literature reviews stay reviews).
+    - ``experimental``: any wet-lab cue (even if computation is also mentioned).
+    - ``computational``: computation-only (computational cues, no wet-lab cues).
+    - ``unknown``: neither family matched.
     """
     text = _text(paper)
     oa_type = str(paper.get("type") or "").lower()
@@ -58,17 +61,12 @@ def classify_paper(paper: dict[str, Any]) -> dict[str, Any]:
     comp_n = len(comp_hits)
     exp_n = len(exp_hits)
 
-    if review_hit and comp_n == 0 and exp_n == 0:
+    if review_hit:
         label = "review"
-    elif review_hit and (comp_n or exp_n):
-        # Reviews that are clearly method-focused still count as review.
-        label = "review"
-    elif comp_n > 0 and exp_n > 0:
-        label = "mixed"
-    elif comp_n > 0:
-        label = "computational"
     elif exp_n > 0:
         label = "experimental"
+    elif comp_n > 0:
+        label = "computational"
     else:
         label = "unknown"
 
@@ -78,4 +76,6 @@ def classify_paper(paper: dict[str, Any]) -> dict[str, Any]:
         "review_signal": review_hit,
         "computational_hits": comp_n,
         "experimental_hits": exp_n,
+        "has_wet_lab": exp_n > 0,
+        "computation_only": comp_n > 0 and exp_n == 0 and not review_hit,
     }

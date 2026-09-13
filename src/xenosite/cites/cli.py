@@ -285,8 +285,8 @@ def cmd_analyze(args: argparse.Namespace) -> None:
         "## Classes",
         "",
         "Heuristic labels from OpenAlex `type` plus title/abstract keywords "
-        "(`review` / `computational` / `experimental` / `mixed` / `unknown`). "
-        "Mixed means both computational and experimental cues appear.",
+        "(`review` / `experimental` = any wet-lab cue / `computational` = "
+        "computation-only / `unknown`).",
         "",
         "## Predict-then-test",
         "",
