@@ -148,16 +148,28 @@ class OpenAlexClient:
         return self._get(f"/works/doi:{quote(clean, safe='')}")
 
     def iter_citing_works(
-        self, openalex_id: str, *, per_page: int = 200
+        self,
+        openalex_id: str,
+        *,
+        per_page: int = 200,
+        from_created_date: str | None = None,
     ) -> Iterator[dict[str, Any]]:
-        """Yield works that cite ``openalex_id`` (full OpenAlex URL or short id)."""
+        """Yield works that cite ``openalex_id`` (full OpenAlex URL or short id).
+
+        If ``from_created_date`` is set (``YYYY-MM-DD``), only works created in
+        OpenAlex on/after that date are returned (useful for incremental updates).
+        """
         short = openalex_id.rstrip("/").split("/")[-1]
+        parts = [f"cites:{short}"]
+        if from_created_date:
+            parts.append(f"from_created_date:{from_created_date}")
+        filt = ",".join(parts)
         cursor: str | None = "*"
         while cursor:
             data = self._get(
                 "/works",
                 {
-                    "filter": f"cites:{short}",
+                    "filter": filt,
                     "per_page": per_page,
                     "cursor": cursor,
                 },

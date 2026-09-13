@@ -325,6 +325,19 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     (out_dir / "analysis_report.md").write_text(report, encoding="utf-8")
 
 
+def cmd_update_citations(args: argparse.Namespace) -> None:
+    from xenosite.cites.update import update_citations
+
+    update_citations(
+        artifacts_dir=Path(args.artifacts_dir),
+        mailto=args.mailto,
+        since=args.since,
+        full=args.full,
+        overlap_days=args.overlap_days,
+        update_volatile=args.update_volatile,
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="xenosite-cites")
     parser.add_argument("--mailto", default="swamidass@gmail.com")
@@ -358,6 +371,29 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--data-dir", default="data/analysis")
     analyze.add_argument("--n-topics", type=int, default=8)
     analyze.set_defaults(func=cmd_analyze)
+
+    update = sub.add_parser(
+        "update-citations",
+        help="Incrementally refresh OpenAlex citing works (diff-minimizing writes)",
+    )
+    update.add_argument("--artifacts-dir", default="artifacts")
+    update.add_argument(
+        "--since",
+        default=None,
+        help="OpenAlex from_created_date (YYYY-MM-DD); default from last manifest",
+    )
+    update.add_argument(
+        "--full",
+        action="store_true",
+        help="Ignore since/manifest and refetch all citing works",
+    )
+    update.add_argument("--overlap-days", type=int, default=14)
+    update.add_argument(
+        "--update-volatile",
+        action="store_true",
+        help="Also refresh cited_by_count on existing rows (more diff churn)",
+    )
+    update.set_defaults(func=cmd_update_citations)
 
     return parser
 
