@@ -2,6 +2,13 @@
 
 ## 2026-09-13
 
+- Class rule changed: any wet-lab cue → `experimental`; `computational` is computation-only (dropped `mixed`). Recount: experimental 350, computational 245, review 46, unknown 136.
+- Predict-then-test: infer XenoSite use from seed citation + metabolism + computational/experimental pairing so lab terbinafine papers (2018/2019) rank high without naming the tool in abstracts.
+- Recent citation pace ~1.5–2 citing papers/week (2025–2026). Top recent seeds: epoxidation 2015, XenoSite 2013, Metabolic Rainbow 2020; Rainbow share up vs 2021–2023, XenoSite 2013 share down.
+- Epoxidation leads partly from early ACS Cent. Sci. DL reactive-metabolite visibility and co-citation with the reactivity suite; a few synthetic-chemistry “epoxidation” papers also cite it (likely topic bleed).
+
+## 2026-09-13
+
 - Ran `uv run snakemake -c1 -s workflow/Snakefile`: 17 seeds → 777 citing papers, 1268 edges; 566/794 papers have abstracts; 201 multi-seed citers. Summary in `data/summary.json`; full payloads under `artifacts/`.
 - Analysis: heuristic classes on 777 citers (computational 245, mixed 230, experimental 120, review 46, unknown 136); 8 NMF topics; figures in docs/figures/.
 - Predict-then-test detector: title/abstract heuristics for XenoSite-family tool use followed by experimental testing; 17 high / 1 medium / 50 low on current corpus (`data/analysis/predict_then_test.jsonl`).
