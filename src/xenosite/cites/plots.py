@@ -19,11 +19,11 @@ def _citing(papers: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def plot_citations_by_year(
     papers: list[dict[str, Any]], path: Path, *, min_year: int = 2012
 ) -> None:
-    years = [
-        p.get("year")
-        for p in _citing(papers)
-        if isinstance(p.get("year"), int) and p["year"] >= min_year
-    ]
+    years: list[int] = []
+    for paper in _citing(papers):
+        year = paper.get("year")
+        if isinstance(year, int) and year >= min_year:
+            years.append(year)
     counts = Counter(years)
     xs = sorted(counts)
     ys = [counts[x] for x in xs]
