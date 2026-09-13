@@ -156,3 +156,19 @@ def plot_topic_sizes(topics: list[dict[str, Any]], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=150)
     plt.close(fig)
+
+
+def plot_predict_then_test_counts(confidences: list[str], path: Path) -> None:
+    order = ["high", "medium", "low"]
+    counts = Counter(confidences)
+    xs = [k for k in order if counts.get(k)]
+    ys = [counts[k] for k in xs]
+    colors = {"high": "#2c6e8a", "medium": "#8a4b2c", "low": "#bbbbbb"}
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.bar(xs, ys, color=[colors.get(x, "#444") for x in xs])
+    ax.set_ylabel("Papers")
+    ax.set_title("Predict-then-test candidates (XenoSite → experiment)")
+    fig.tight_layout()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, dpi=150)
+    plt.close(fig)

@@ -68,9 +68,11 @@ rule analyze:
         ART / "analysis" / "analysis_summary.json",
         ART / "analysis" / "topics.json",
         ART / "analysis" / "classifications.jsonl",
+        ART / "analysis" / "predict_then_test.jsonl",
         ART / "analysis" / "analysis_report.md",
         "data/analysis/analysis_summary.json",
         "data/analysis/topics.json",
+        "data/analysis/predict_then_test.jsonl",
         "data/analysis/analysis_report.md",
         "docs/figures/citations_by_year.png",
         "docs/figures/top_venues.png",
@@ -78,6 +80,7 @@ rule analyze:
         "docs/figures/class_counts.png",
         "docs/figures/class_by_year.png",
         "docs/figures/topic_sizes.png",
+        "docs/figures/predict_then_test_counts.png",
     shell:
         "uv run python -m xenosite.cites.cli analyze "
         "--papers {input.papers} "
