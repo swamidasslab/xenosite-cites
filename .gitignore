@@ -1,3 +1,11 @@
+artifacts/*.log
+artifacts/**/*.log
+artifacts/analysis/
+.snakemake/
+uv.lock
+.python-version
+.envrc
+src/xenosite/cites/_version.py
 __pycache__/
 *.py[cod]
 *$py.class
@@ -21,9 +29,3 @@ coverage.xml
 .ipynb_checkpoints/
 .direnv/
 .DS_Store
-artifacts/
-.snakemake/
-uv.lock
-.python-version
-.envrc
-src/xenosite/cites/_version.py

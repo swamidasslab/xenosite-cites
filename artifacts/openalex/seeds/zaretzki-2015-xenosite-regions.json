@@ -1,0 +1,66 @@
+{
+  "raw_openalex_id": "https://openalex.org/W2171716332",
+  "seed": {
+    "abstract": "MOTIVATION: Cytochrome P450s are a family of enzymes responsible for the metabolism of approximately 90% of FDA-approved drugs. Medicinal chemists often want to know which atoms of a molecule-its metabolized sites-are oxidized by Cytochrome P450s in order to modify their metabolism. Consequently, there are several methods that use literature-derived, atom-resolution data to train models that can predict a molecule's sites of metabolism. There is, however, much more data available at a lower resolution, where the exact site of metabolism is not known, but the region of the molecule that is oxidized is known. Until now, no site-of-metabolism models made use of region-resolution data. RESULTS: Here, we describe XenoSite-Region, the first reported method for training site-of-metabolism models with region-resolution data. Our approach uses the Expectation Maximization algorithm to train a site-of-metabolism model. Region-resolution metabolism data was simulated from a large site-of-metabolism dataset, containing 2000 molecules with 3400 metabolized and 30 000 un-metabolized sites and covering nine Cytochrome P450 isozymes. When training on the same molecules (but with only region-level information), we find that this approach yields models almost as accurate as models trained with atom-resolution data. Moreover, we find that atom-resolution trained models are more accurate when also trained with region-resolution data from additional molecules. Our approach, therefore, opens up a way to extend the applicable domain of site-of-metabolism models into larger regions of chemical space. This meets a critical need in drug development by tapping into underutilized data commonly available in most large drug companies. AVAILABILITY AND IMPLEMENTATION: The algorithm, data and a web server are available at http://swami.wustl.edu/xregion.",
+    "authors": [
+      "Jed Zaretzki",
+      "Michael R. Browning",
+      "Tyler B. Hughes",
+      "S. Joshua Swamidass"
+    ],
+    "cited_by_api_url": null,
+    "cited_by_count": 16,
+    "doi": "10.1093/bioinformatics/btv100",
+    "ids": {
+      "doi": "https://doi.org/10.1093/bioinformatics/btv100",
+      "mag": "2171716332",
+      "openalex": "https://openalex.org/W2171716332",
+      "pmid": "https://pubmed.ncbi.nlm.nih.gov/25697821"
+    },
+    "openalex_id": "https://openalex.org/W2171716332",
+    "publication_date": "2015-02-19",
+    "referenced_works": [
+      "https://openalex.org/W1498183065",
+      "https://openalex.org/W1598925596",
+      "https://openalex.org/W1968459892",
+      "https://openalex.org/W1974254541",
+      "https://openalex.org/W1981367467",
+      "https://openalex.org/W1984648567",
+      "https://openalex.org/W1996242650",
+      "https://openalex.org/W2001265990",
+      "https://openalex.org/W2015503332",
+      "https://openalex.org/W2016160402",
+      "https://openalex.org/W2024469207",
+      "https://openalex.org/W2026480276",
+      "https://openalex.org/W2026834364",
+      "https://openalex.org/W2032271067",
+      "https://openalex.org/W2035091931",
+      "https://openalex.org/W2043676765",
+      "https://openalex.org/W2048869777",
+      "https://openalex.org/W2049633694",
+      "https://openalex.org/W2070232376",
+      "https://openalex.org/W2072852575",
+      "https://openalex.org/W2083322951",
+      "https://openalex.org/W2090505208",
+      "https://openalex.org/W2092818812",
+      "https://openalex.org/W2104925243",
+      "https://openalex.org/W2107183338",
+      "https://openalex.org/W2123513767",
+      "https://openalex.org/W2137262074",
+      "https://openalex.org/W2146844279",
+      "https://openalex.org/W2153163416",
+      "https://openalex.org/W2200810672"
+    ],
+    "seed_id": "zaretzki-2015-xenosite-regions",
+    "seed_notes": "Region-resolution extension of P450 SOM models (XenoSite Regions).",
+    "seed_tags": [
+      "xenosite",
+      "som",
+      "regions"
+    ],
+    "title": "Extending P450 site-of-metabolism models with region-resolution data",
+    "type": "article",
+    "venue": "Bioinformatics",
+    "year": 2015
+  }
+}

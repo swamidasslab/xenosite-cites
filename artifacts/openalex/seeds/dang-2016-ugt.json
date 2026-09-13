@@ -1,0 +1,57 @@
+{
+  "raw_openalex_id": "https://openalex.org/W2473257559",
+  "seed": {
+    "abstract": "MOTIVATION: Uridine diphosphate glucunosyltransferases (UGTs) metabolize 15% of FDA approved drugs. Lead optimization efforts benefit from knowing how candidate drugs are metabolized by UGTs. This paper describes a computational method for predicting sites of UGT-mediated metabolism on drug-like molecules. RESULTS: XenoSite correctly predicts test molecule's sites of glucoronidation in the Top-1 or Top-2 predictions at a rate of 86 and 97%, respectively. In addition to predicting common sites of UGT conjugation, like hydroxyl groups, it can also accurately predict the glucoronidation of atypical sites, such as carbons. We also describe a simple heuristic model for predicting UGT-mediated sites of metabolism that performs nearly as well (with, respectively, 80 and 91% Top-1 and Top-2 accuracy), and can identify the most challenging molecules to predict on which to assess more complex models. Compared with prior studies, this model is more generally applicable, more accurate and simpler (not requiring expensive quantum modeling). AVAILABILITY AND IMPLEMENTATION: The UGT metabolism predictor developed in this study is available at http://swami.wustl.edu/xenosite/p/ugt CONTACT: : swamidass@wustl.eduSupplementary information: Supplementary data are available at Bioinformatics online.",
+    "authors": [
+      "Na Le Dang",
+      "Tyler B. Hughes",
+      "Varun K. Krishnamurthy",
+      "S. Joshua Swamidass"
+    ],
+    "cited_by_api_url": null,
+    "cited_by_count": 87,
+    "doi": "10.1093/bioinformatics/btw350",
+    "ids": {
+      "doi": "https://doi.org/10.1093/bioinformatics/btw350",
+      "mag": "2473257559",
+      "openalex": "https://openalex.org/W2473257559",
+      "pmid": "https://pubmed.ncbi.nlm.nih.gov/27324196"
+    },
+    "openalex_id": "https://openalex.org/W2473257559",
+    "publication_date": "2016-06-20",
+    "referenced_works": [
+      "https://openalex.org/W1968322077",
+      "https://openalex.org/W1974254541",
+      "https://openalex.org/W1980908338",
+      "https://openalex.org/W1998336053",
+      "https://openalex.org/W2003060201",
+      "https://openalex.org/W2032271067",
+      "https://openalex.org/W2058029975",
+      "https://openalex.org/W2070069664",
+      "https://openalex.org/W2090268632",
+      "https://openalex.org/W2101089712",
+      "https://openalex.org/W2101900366",
+      "https://openalex.org/W2115763439",
+      "https://openalex.org/W2117750093",
+      "https://openalex.org/W2124524221",
+      "https://openalex.org/W2129075135",
+      "https://openalex.org/W2129837650",
+      "https://openalex.org/W2130574441",
+      "https://openalex.org/W2137028606",
+      "https://openalex.org/W2141200011",
+      "https://openalex.org/W2160678403",
+      "https://openalex.org/W2167501156",
+      "https://openalex.org/W2169678694"
+    ],
+    "seed_id": "dang-2016-ugt",
+    "seed_notes": "UGT SOM model; cited on xenosite.org.",
+    "seed_tags": [
+      "xenosite",
+      "ugt"
+    ],
+    "title": "A simple model predicts UGT-mediated metabolism",
+    "type": "article",
+    "venue": "Bioinformatics",
+    "year": 2016
+  }
+}

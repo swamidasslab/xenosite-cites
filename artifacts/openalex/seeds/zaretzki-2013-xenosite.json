@@ -1,0 +1,57 @@
+{
+  "raw_openalex_id": "https://openalex.org/W2032271067",
+  "seed": {
+    "abstract": "Understanding how xenobiotic molecules are metabolized is important because it influences the safety, efficacy, and dose of medicines and how they can be modified to improve these properties. The cytochrome P450s (CYPs) are proteins responsible for metabolizing 90% of drugs on the market, and many computational methods can predict which atomic sites of a molecule--sites of metabolism (SOMs)--are modified during CYP-mediated metabolism. This study improves on prior methods of predicting CYP-mediated SOMs by using new descriptors and machine learning based on neural networks. The new method, XenoSite, is faster to train and more accurate by as much as 4% or 5% for some isozymes. Furthermore, some \"incorrect\" predictions made by XenoSite were subsequently validated as correct predictions by revaluation of the source literature. Moreover, XenoSite output is interpretable as a probability, which reflects both the confidence of the model that a particular atom is metabolized and the statistical likelihood that its prediction for that atom is correct.",
+    "authors": [
+      "Jed Zaretzki",
+      "Matthew K. Matlock",
+      "S. Joshua Swamidass"
+    ],
+    "cited_by_api_url": null,
+    "cited_by_count": 224,
+    "doi": "10.1021/ci400518g",
+    "ids": {
+      "doi": "https://doi.org/10.1021/ci400518g",
+      "mag": "2032271067",
+      "openalex": "https://openalex.org/W2032271067",
+      "pmid": "https://pubmed.ncbi.nlm.nih.gov/24224933"
+    },
+    "openalex_id": "https://openalex.org/W2032271067",
+    "publication_date": "2013-11-13",
+    "referenced_works": [
+      "https://openalex.org/W1759188384",
+      "https://openalex.org/W1814153247",
+      "https://openalex.org/W1974254541",
+      "https://openalex.org/W1984648567",
+      "https://openalex.org/W1984994707",
+      "https://openalex.org/W1996242650",
+      "https://openalex.org/W2010700988",
+      "https://openalex.org/W2024469207",
+      "https://openalex.org/W2026480276",
+      "https://openalex.org/W2029740334",
+      "https://openalex.org/W2035091931",
+      "https://openalex.org/W2040324575",
+      "https://openalex.org/W2066273100",
+      "https://openalex.org/W2071086973",
+      "https://openalex.org/W2071196962",
+      "https://openalex.org/W2081301924",
+      "https://openalex.org/W2090505208",
+      "https://openalex.org/W2099854653",
+      "https://openalex.org/W2104925243",
+      "https://openalex.org/W2139728745",
+      "https://openalex.org/W2163404084",
+      "https://openalex.org/W2496780187"
+    ],
+    "seed_id": "zaretzki-2013-xenosite",
+    "seed_notes": "Foundational CYP SOM neural-network paper.",
+    "seed_tags": [
+      "xenosite",
+      "som",
+      "cyp"
+    ],
+    "title": "XenoSite: Accurately Predicting CYP-Mediated Sites of Metabolism with Neural Networks",
+    "type": "article",
+    "venue": "Journal of Chemical Information and Modeling",
+    "year": 2013
+  }
+}
