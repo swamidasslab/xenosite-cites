@@ -39,8 +39,8 @@ bash scripts/update_and_analyze.sh
 Local `docs/figures/*.png` stay gitignored. A weekly Action updates citation
 data; a separate Pages deploy rebuilds charts for the site.
 
-Enable **Settings → Pages → Source: GitHub Actions**. This is a private repo;
-Pages visibility depends on the org/plan (private Pages need Team/Enterprise).
+Enable **Settings → Pages → Source: GitHub Actions**. The site can be public;
+pages ship with `noindex, noarchive` and a disallow-all `robots.txt`.
 
 Outputs:
 
