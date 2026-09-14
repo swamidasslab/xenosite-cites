@@ -248,6 +248,7 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     _write_jsonl(data_dir / "predict_then_test.jsonl", predict_then_test_rows)
 
     labels = [r["label"] for r in classifications]
+    competitors = load_competitors(Path(args.competitors))
     fig_writer = plots.FigureWriter(fig_dir)
     plots.plot_citations_by_year(papers, fig_writer)
     plots.plot_top_venues(papers, fig_writer)
@@ -259,6 +260,7 @@ def cmd_analyze(args: argparse.Namespace) -> None:
         [r["confidence"] for r in predict_then_test_rows],
         fig_writer,
     )
+    plots.plot_competitor_families(competitors, fig_writer)
     fig_writer.flush()
     print(f"[analyze] figures written={fig_writer.n_written}", flush=True)
 
@@ -272,6 +274,7 @@ def cmd_analyze(args: argparse.Namespace) -> None:
         "class_by_year.png",
         "topic_sizes.png",
         "predict_then_test_counts.png",
+        "competitor_families.png",
     ):
         src = fig_dir / name
         if src.exists():
@@ -335,7 +338,6 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     (data_dir / "analysis_report.md").write_text(report, encoding="utf-8")
     (out_dir / "analysis_report.md").write_text(report, encoding="utf-8")
 
-    competitors = load_competitors(Path(args.competitors))
     explorer = build_explorer_payload(
         papers=papers,
         summary=summary,

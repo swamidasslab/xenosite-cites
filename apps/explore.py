@@ -48,8 +48,8 @@ def _(data, mo):
         f"""
 # XenoSite citation explorer
 
-Interactive view of OpenAlex citing papers for the XenoSite-family seed set.
-Filters update charts and tables from the analysis payload served with this page.
+Interactive view of OpenAlex citing papers for the XenoSite-family seed set,
+plus a combined-seed comparison to other SOM / metabolism tools.
 
 - Citing papers: **{data["analysis"].get("n_citing", "—")}**
 - Topics: **{len(data["analysis"].get("topics") or [])}**
@@ -87,6 +87,101 @@ def _(data, pd):
         year_max,
         year_min,
     )
+
+
+@app.cell
+def _(competitors, mo):
+    mo.md(
+        """
+## SOM software comparison
+
+Unique citing papers across each approach’s **combined method-paper seed set**
+(not a single flagship). Default view is classic SOM tools plus the XenoSite suite;
+add metabolite / related categories as needed.
+"""
+    )
+    cat_options = (
+        sorted(competitors["category"].dropna().astype(str).unique().tolist())
+        if not competitors.empty and "category" in competitors.columns
+        else ["som", "suite", "metabolite", "related"]
+    )
+    default_cats = [c for c in ("som", "suite") if c in cat_options] or cat_options
+    competitor_cats = mo.ui.multiselect(
+        options=cat_options,
+        value=default_cats,
+        label="Categories",
+    )
+    competitor_cats
+    return (competitor_cats,)
+
+
+@app.cell
+def _(alt, competitor_cats, competitors, mo):
+    if competitors.empty:
+        mo.md("_No competitor summary in payload._")
+    else:
+        view = competitors.copy()
+        if "category" in view.columns and competitor_cats.value:
+            view = view[view["category"].isin(competitor_cats.value)]
+        view = view.sort_values("unique_citers", ascending=False)
+        chart = (
+            alt.Chart(view)
+            .mark_bar()
+            .encode(
+                x=alt.X("unique_citers:Q", title="Unique citing papers"),
+                y=alt.Y("family:N", sort="-x", title="Approach"),
+                color=alt.Color(
+                    "category:N",
+                    title="Category",
+                    scale=alt.Scale(
+                        domain=["som", "suite", "metabolite", "related"],
+                        range=["#8a4b2c", "#2c6e8a", "#3d7a5c", "#888888"],
+                    ),
+                ),
+                tooltip=[
+                    "family",
+                    "category",
+                    "n_seeds",
+                    "unique_citers",
+                    "niche",
+                    "notes",
+                ],
+            )
+            .properties(
+                height=max(220, 28 * max(len(view), 1)),
+                title="Citation reach by software family (combined seeds)",
+            )
+        )
+        cols = [
+            c
+            for c in [
+                "family",
+                "category",
+                "n_seeds",
+                "unique_citers",
+                "sum_seed_cited_by",
+                "niche",
+                "notes",
+            ]
+            if c in view.columns
+        ]
+        mo.vstack(
+            [
+                chart,
+                mo.ui.table(view[cols], selection=None, page_size=12),
+                mo.md(
+                    "_Σ seed cites double-counts multi-seed citers; "
+                    "**unique_citers** is the fair total._"
+                ),
+            ]
+        )
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("## XenoSite citing papers")
+    return
 
 
 @app.cell
@@ -321,36 +416,6 @@ def _(mo, ptt, ptt_conf):
             label=f"PTT rows (showing {min(100, len(view))} of {len(view)})",
             page_size=20,
         )
-    return
-
-
-@app.cell
-def _(alt, competitors, mo):
-    mo.md(
-        """
-## Competitor approaches (combined seeds)
-
-Fair comparison uses the union of citing works across each tool family's method
-papers (not a single flagship).
-"""
-    )
-    if competitors.empty:
-        mo.md("_No competitor summary in payload._")
-    else:
-        chart = (
-            alt.Chart(competitors)
-            .mark_bar()
-            .encode(
-                x=alt.X("unique_citers:Q", title="Unique citing papers"),
-                y=alt.Y("family:N", sort="-x", title="Approach"),
-                tooltip=["family", "n_seeds", "unique_citers", "niche", "notes"],
-            )
-            .properties(
-                height=280,
-                title="Unique citers across each approach's seed set",
-            )
-        )
-        mo.vstack([chart, mo.ui.table(competitors, selection=None, page_size=12)])
     return
 
 

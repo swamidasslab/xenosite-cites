@@ -1,78 +1,142 @@
 {
   "source": "OpenAlex unique citing-work unions (2026-09-13); XenoSite from local papers.jsonl",
   "metric": "unique_citing_papers_across_seed_set",
+  "updated": "2026-09-13",
   "families": [
     {
-      "family": "XenoSite",
+      "family": "XenoSite (full suite)",
       "n_seeds": 17,
       "unique_citers": 777,
       "sum_seed_cited_by": 1317,
+      "category": "suite",
       "niche": "SOM + reactivity + metabolites",
-      "notes": "Full XenoSite-family suite"
+      "notes": "All XenoSite-family method papers",
+      "seeds": [
+        "zaretzki-2012-rs-webpredictor",
+        "zaretzki-2013-xenosite",
+        "matlock-2015-xenosite-server",
+        "zaretzki-2015-xenosite-regions",
+        "hughes-2015-gsh-reactivity",
+        "hughes-2016-macromolecule-reactivity",
+        "matlock-2018-promiscuous-reactivity",
+        "hughes-2015-epoxidation",
+        "hughes-2017-quinone",
+        "dang-2018-n-dealkylation",
+        "dang-2017-casa",
+        "dang-2016-ugt",
+        "dang-2020-metabolic-rainbow",
+        "hughes-2020-metabolic-forest",
+        "flynn-2020-xenonet",
+        "hughes-2021-bioactivation",
+        "flynn-2023-mpnn-authenticity"
+      ]
     },
     {
-      "family": "BioTransformer",
-      "n_seeds": 1,
-      "unique_citers": 509,
-      "sum_seed_cited_by": 531,
-      "niche": "Metabolite structures",
-      "notes": "Adjacent task; single method paper"
+      "family": "XenoSite (SOM seeds)",
+      "n_seeds": 5,
+      "unique_citers": 370,
+      "sum_seed_cited_by": 477,
+      "category": "som",
+      "niche": "CYP / phase-I SOM",
+      "notes": "RS-WebPredictor, XenoSite 2013, server, regions, Rainbow",
+      "seeds": [
+        "zaretzki-2012-rs-webpredictor",
+        "zaretzki-2013-xenosite",
+        "matlock-2015-xenosite-server",
+        "zaretzki-2015-xenosite-regions",
+        "dang-2020-metabolic-rainbow"
+      ]
     },
     {
       "family": "SMARTCyp",
       "n_seeds": 4,
       "unique_citers": 485,
       "sum_seed_cited_by": 626,
+      "category": "som",
       "niche": "CYP SOM",
-      "notes": "2010 + server + 2.0 + 3.0"
+      "notes": "2010 method + server + 2.0 + 3.0",
+      "seeds": [
+        "10.1021/ml100016x",
+        "10.1093/bioinformatics/btq584",
+        "10.1021/ci3001524",
+        "10.1093/bioinformatics/btz037"
+      ]
     },
     {
       "family": "MetaSite",
       "n_seeds": 1,
       "unique_citers": 482,
       "sum_seed_cited_by": 496,
+      "category": "som",
       "niche": "CYP SOM",
-      "notes": "Commercial; one canonical method paper"
+      "notes": "Commercial; Cruciani 2005 method paper",
+      "seeds": ["10.1021/jm050529c"]
     },
     {
       "family": "FAME + GLORY",
       "n_seeds": 5,
       "unique_citers": 344,
       "sum_seed_cited_by": 500,
+      "category": "som",
       "niche": "SOM + metabolite enumeration",
-      "notes": "FAME 1-3 + GLORY + GLORYx"
-    },
-    {
-      "family": "SyGMa",
-      "n_seeds": 1,
-      "unique_citers": 159,
-      "sum_seed_cited_by": 184,
-      "niche": "Metabolite structures",
-      "notes": "Rule-based enumeration"
-    },
-    {
-      "family": "CypReact + CyProduct",
-      "n_seeds": 2,
-      "unique_citers": 111,
-      "sum_seed_cited_by": 128,
-      "niche": "CYP reactant / products",
-      "notes": "Related CYP ML tools"
+      "notes": "FAME 1-3 + GLORY + GLORYx (Kirchmair)",
+      "seeds": [
+        "10.1021/ci400503s",
+        "10.1021/acs.jcim.7b00250",
+        "10.1021/acs.jcim.9b00376",
+        "10.3389/fchem.2019.00402",
+        "10.1021/acs.chemrestox.0c00224"
+      ]
     },
     {
       "family": "SOMP",
       "n_seeds": 1,
       "unique_citers": 108,
       "sum_seed_cited_by": 125,
+      "category": "som",
       "niche": "CYP SOM",
-      "notes": "Way2Drug / PASS"
+      "notes": "Way2Drug / PASS web server",
+      "seeds": ["10.1093/bioinformatics/btv087"]
     },
     {
       "family": "CypScore",
       "n_seeds": 1,
       "unique_citers": 78,
       "sum_seed_cited_by": 92,
-      "niche": "CYP reactivity",
-      "notes": "Older reactivity scores"
+      "category": "som",
+      "niche": "CYP reactivity / SOM",
+      "notes": "Hennemann 2009",
+      "seeds": ["10.1002/cmdc.200800384"]
+    },
+    {
+      "family": "BioTransformer",
+      "n_seeds": 1,
+      "unique_citers": 509,
+      "sum_seed_cited_by": 531,
+      "category": "metabolite",
+      "niche": "Metabolite structures",
+      "notes": "Adjacent: rule/ML metabolite enumeration",
+      "seeds": ["10.1186/s13321-018-0324-5"]
+    },
+    {
+      "family": "SyGMa",
+      "n_seeds": 1,
+      "unique_citers": 159,
+      "sum_seed_cited_by": 184,
+      "category": "metabolite",
+      "niche": "Metabolite structures",
+      "notes": "Rule-based metabolite enumeration",
+      "seeds": ["10.1002/cmdc.200700312"]
+    },
+    {
+      "family": "CypReact + CyProduct",
+      "n_seeds": 2,
+      "unique_citers": 111,
+      "sum_seed_cited_by": 128,
+      "category": "related",
+      "niche": "CYP reactant / products",
+      "notes": "Related CYP ML tools (not classic SOM ranking)",
+      "seeds": ["10.1021/acs.jcim.8b00035", "10.1021/acs.jcim.1c00144"]
     }
   ]
 }

@@ -199,3 +199,46 @@ def plot_predict_then_test_counts(confidences: list[str], writer: FigureWriter) 
     ax.set_title("Predict-then-test candidates (XenoSite → experiment)")
     fig.tight_layout()
     return writer.save("predict_then_test_counts.png", data, fig)
+
+
+def plot_competitor_families(
+    competitors: dict[str, Any],
+    writer: FigureWriter,
+    *,
+    categories: tuple[str, ...] = ("som", "suite"),
+) -> bool:
+    """Horizontal bars of unique citers for SOM / suite competitor families."""
+    families = list(competitors.get("families") or [])
+    rows = [
+        f
+        for f in families
+        if str(f.get("category") or "") in categories and isinstance(f.get("unique_citers"), int)
+    ]
+    rows.sort(key=lambda f: int(f["unique_citers"]))
+    labels = [str(f.get("family") or "") for f in rows]
+    vals = [int(f["unique_citers"]) for f in rows]
+    data = {
+        "families": labels,
+        "counts": vals,
+        "categories": list(categories),
+        "metric": competitors.get("metric"),
+    }
+    fig, ax = plt.subplots(figsize=(9, max(3.5, 0.45 * max(len(rows), 1) + 1.5)))
+    if not rows:
+        ax.text(0.5, 0.5, "No competitor families", ha="center", va="center")
+        ax.axis("off")
+    else:
+        colors = []
+        for fam in rows:
+            cat = str(fam.get("category") or "")
+            if "XenoSite" in str(fam.get("family") or ""):
+                colors.append("#2c6e8a")
+            elif cat == "suite":
+                colors.append("#3d7a5c")
+            else:
+                colors.append("#8a4b2c")
+        ax.barh(labels, vals, color=colors)
+        ax.set_xlabel("Unique citing papers (union across seed set)")
+        ax.set_title("SOM software citation reach (combined seeds)")
+    fig.tight_layout()
+    return writer.save("competitor_families.png", data, fig)

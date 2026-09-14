@@ -117,12 +117,34 @@
         <h2>Interactive explorer</h2>
         <p>
           Filter citing papers by year, class, topic, seed, and
-          predict-then-test confidence. Runs entirely in the browser (static
-          marimo / WebAssembly) against the analysis JSON built on deploy.
+          predict-then-test confidence. Includes an interactive SOM software
+          comparison. Runs in the browser (static marimo / WebAssembly).
         </p>
         <p class="meta" style="border: none; margin: 0; padding: 0">
           <a href="explore/">Open explorer →</a>
         </p>
+      </section>
+
+      <section>
+        <h2>SOM software comparison</h2>
+        <p>
+          Unique citing papers across each approach’s combined method-paper seed
+          set (not flagship-only). XenoSite is shown as the full suite and as
+          SOM-tagged seeds only.
+        </p>
+        <figure>
+          <img
+            src="figures/competitor_families.png"
+            alt="Horizontal bar chart comparing unique citers for SOM software families"
+            width="1200"
+            height="700"
+          />
+          <figcaption>
+            Metric: unique OpenAlex citing works unioned across each family’s
+            seeds. Commercial tools (MetaSite, StarDrop, ADMET Predictor) are
+            undercounted relative to industry use.
+          </figcaption>
+        </figure>
       </section>
 
       <section>

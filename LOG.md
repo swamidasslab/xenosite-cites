@@ -2,6 +2,10 @@
 
 ## 2026-09-13
 
+- SOM software comparison on Pages/explorer: `data/competitors.json` now tags categories (som/suite/metabolite/related) and includes XenoSite SOM-seed subset (370 unique) vs full suite (777). Gallery figure `competitor_families.png`; explorer section moved to top with category filter.
+
+## 2026-09-13
+
 - Static marimo explorer on Pages: `apps/explore.py` + slim `explorer.json` (filters, charts, PTT, competitor family unions). `scripts/build_pages.sh` runs analyze then `marimo export html-wasm` into `docs/explore/` (gitignored; built on deploy).
 
 ## 2026-09-13
