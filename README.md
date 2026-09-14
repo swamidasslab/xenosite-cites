@@ -17,7 +17,10 @@ uv sync --group workflow --group dev
 uv run snakemake -c1 -s workflow/Snakefile
 ```
 
-Analysis (class labels, NMF topics, figures) is included in that DAG. Figures land in `docs/figures/`; a short write-up is in `data/analysis/analysis_report.md`.
+Analysis (class labels, NMF topics, figures) is included in that DAG. Analysis
+JSON lands in `data/analysis/`. **PNG figures are not committed**; the
+[Pages workflow](.github/workflows/pages.yml) regenerates them into
+`docs/figures/` and deploys [docs/index.html](docs/index.html).
 
 ### Incremental updates
 
@@ -33,7 +36,11 @@ uv run xenosite-cites update-citations
 bash scripts/update_and_analyze.sh
 ```
 
-A weekly GitHub Action (`.github/workflows/weekly-citation-update.yml`) runs the same helper and commits changes.
+Local `docs/figures/*.png` stay gitignored. A weekly Action updates citation
+data; a separate Pages deploy rebuilds charts for the site.
+
+Enable **Settings → Pages → Source: GitHub Actions**. This is a private repo;
+Pages visibility depends on the org/plan (private Pages need Team/Enterprise).
 
 Outputs:
 
@@ -46,6 +53,7 @@ Outputs:
 | `artifacts/graph/edges.jsonl` | Citing → seed edges |
 | `artifacts/graph/summary.json` | Counts |
 | `data/summary.json` | Same summary, tracked in git |
+| `docs/index.html` | Gallery page (PNGs filled in at Pages deploy) |
 
 ## Development
 

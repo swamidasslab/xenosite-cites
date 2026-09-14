@@ -2,6 +2,11 @@
 
 ## 2026-09-13
 
+- PNGs moved out of git: `docs/figures/*.png` gitignored; Pages workflow regenerates charts and deploys `docs/index.html` gallery. Citation/analysis JSON still committed.
+- FigureWriter still skips rewriting local PNGs when plot-data fingerprints match (local convenience only).
+
+## 2026-09-13
+
 - Incremental update (`update-citations`): preserve citing jsonl order, append new IDs only, skip file write if bytes unchanged; skip `cited_by_count` churn unless `--update-volatile` / `--full`.
 - Track `artifacts/openalex` (+ graph) in git; weekly Action `weekly-citation-update.yml` runs `scripts/update_and_analyze.sh` and commits.
 

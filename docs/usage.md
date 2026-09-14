@@ -29,3 +29,16 @@ uv run python -m xenosite.cites.cli fetch-citing --seed-json artifacts/openalex/
 ```
 
 Each citing record keeps title, year, DOI, authors, venue, abstract, and `referenced_works` (OpenAlex IDs). The graph merge records which seed IDs each paper cites.
+
+## Figures / GitHub Pages
+
+PNGs under `docs/figures/` are **gitignored**. They are rendered during the
+Pages deploy from committed `artifacts/graph/` data and shown on
+`docs/index.html`.
+
+```bash
+# Local preview of charts
+uv run xenosite-cites analyze
+open docs/index.html
+```
+

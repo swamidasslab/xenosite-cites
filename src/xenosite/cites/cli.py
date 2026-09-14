@@ -243,15 +243,22 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     _write_jsonl(data_dir / "predict_then_test.jsonl", predict_then_test_rows)
 
     labels = [r["label"] for r in classifications]
-    plots.plot_citations_by_year(papers, fig_dir / "citations_by_year.png")
-    plots.plot_top_venues(papers, fig_dir / "top_venues.png")
-    plots.plot_citations_per_seed(summary, fig_dir / "citations_per_seed.png")
-    plots.plot_class_counts(labels, fig_dir / "class_counts.png")
-    plots.plot_class_by_year(papers, label_by_id, fig_dir / "class_by_year.png")
-    plots.plot_topic_sizes(topic_fit.get("topics") or [], fig_dir / "topic_sizes.png")
+    fig_writer = plots.FigureWriter(fig_dir)
+    plots.plot_citations_by_year(papers, fig_writer)
+    plots.plot_top_venues(papers, fig_writer)
+    plots.plot_citations_per_seed(summary, fig_writer)
+    plots.plot_class_counts(labels, fig_writer)
+    plots.plot_class_by_year(papers, label_by_id, fig_writer)
+    plots.plot_topic_sizes(topic_fit.get("topics") or [], fig_writer)
     plots.plot_predict_then_test_counts(
         [r["confidence"] for r in predict_then_test_rows],
-        fig_dir / "predict_then_test_counts.png",
+        fig_writer,
+    )
+    fig_writer.flush()
+    print(
+        f"[analyze] figures written={fig_writer.n_written} "
+        f"(skipped unchanged plot data)",
+        flush=True,
     )
 
     art_fig = out_dir / "figures"
@@ -267,7 +274,10 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     ):
         src = fig_dir / name
         if src.exists():
-            (art_fig / name).write_bytes(src.read_bytes())
+            dest = art_fig / name
+            payload = src.read_bytes()
+            if not dest.exists() or dest.read_bytes() != payload:
+                dest.write_bytes(payload)
 
     report_lines = [
         "# Citing-paper analysis",
@@ -316,7 +326,7 @@ def cmd_analyze(args: argparse.Namespace) -> None:
             "",
             "## Figures",
             "",
-            "See `docs/figures/` (committed) and `artifacts/analysis/figures/`.",
+            "See `docs/figures/` (gitignored locally; built on GitHub Pages deploy).",
             "",
         ]
     )
