@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install
-        run: uv sync --group dev
+        run: uv sync --group workflow --group dev
       - run: uv run ruff check
       - run: uv run ruff format --check
       - run: uv run mypy src
