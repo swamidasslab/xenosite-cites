@@ -18,9 +18,23 @@ uv run snakemake -c1 -s workflow/Snakefile
 ```
 
 Analysis (class labels, NMF topics, figures) is included in that DAG. Analysis
-JSON lands in `data/analysis/`. **PNG figures are not committed**; the
-[Pages workflow](.github/workflows/pages.yml) regenerates them into
-`docs/figures/` and deploys [docs/index.html](docs/index.html).
+JSON lands in `data/analysis/`. **PNG figures and the marimo WASM explorer are
+not committed**; the [Pages workflow](.github/workflows/pages.yml) regenerates
+them into `docs/` and deploys [docs/index.html](docs/index.html) plus
+[docs/explore/](docs/explore/) (interactive filters over the same payload).
+
+```bash
+# Local Pages tree (figures + static explorer)
+bash scripts/build_pages.sh
+python -m http.server -d docs
+# then open http://127.0.0.1:8000/ and /explore/
+```
+
+Local edit of the explorer notebook:
+
+```bash
+uv run marimo edit apps/explore.py
+```
 
 ### Incremental updates
 
@@ -54,6 +68,9 @@ Outputs:
 | `artifacts/graph/summary.json` | Counts |
 | `data/summary.json` | Same summary, tracked in git |
 | `docs/index.html` | Gallery page (PNGs filled in at Pages deploy) |
+| `docs/explore/` | Static marimo WASM explorer (built on Pages deploy) |
+| `apps/explore.py` | Explorer notebook source |
+| `apps/public/explorer.json` | Slim analysis payload for the explorer |
 
 ## Development
 

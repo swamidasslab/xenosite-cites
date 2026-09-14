@@ -40,5 +40,9 @@ Pages deploy from committed `artifacts/graph/` data and shown on
 # Local preview of charts
 uv run xenosite-cites analyze
 open docs/index.html
-```
 
+# Interactive explorer (browser WASM via static export)
+bash scripts/build_pages.sh
+python -m http.server -d docs
+# http://127.0.0.1:8000/explore/
+```

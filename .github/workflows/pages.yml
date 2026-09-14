@@ -29,31 +29,8 @@ jobs:
       - name: Install
         run: uv sync --group workflow --group dev
 
-      - name: Render figures into docs/figures
-        run: |
-          uv run xenosite-cites analyze \
-            --papers artifacts/graph/papers.jsonl \
-            --summary artifacts/graph/summary.json \
-            --out-dir artifacts/analysis \
-            --figures-dir docs/figures \
-            --data-dir data/analysis
-
-      - name: Stamp build time on gallery
-        run: |
-          BUILD_ISO="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          BUILD_DISPLAY="$(date -u +'%Y-%m-%d %H:%M UTC')"
-          python3 - <<PY
-          from pathlib import Path
-          path = Path("docs/index.html")
-          text = path.read_text(encoding="utf-8")
-          text = text.replace("__BUILD_ISO__", "${BUILD_ISO}")
-          text = text.replace("__BUILD_DISPLAY__", "${BUILD_DISPLAY}")
-          path.write_text(text, encoding="utf-8")
-          Path("docs/build-info.json").write_text(
-              '{"built_at_utc": "${BUILD_ISO}"}\n', encoding="utf-8"
-          )
-          print("stamped", "${BUILD_ISO}")
-          PY
+      - name: Build figures + static marimo explorer
+        run: bash scripts/build_pages.sh
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

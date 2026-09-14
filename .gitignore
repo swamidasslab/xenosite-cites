@@ -1,10 +1,12 @@
 artifacts/*.log
 artifacts/**/*.log
 artifacts/analysis/
-# Figures are built on every Pages/analyze run, not committed.
+# Figures / wasm explorer are built on every Pages deploy, not committed.
 docs/figures/*.png
 docs/figures/manifest.json
+docs/explore/
 docs/build-info.json
+docs/.nojekyll
 .snakemake/
 uv.lock
 .python-version

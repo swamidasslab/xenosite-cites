@@ -2,6 +2,10 @@
 
 ## 2026-09-13
 
+- Static marimo explorer on Pages: `apps/explore.py` + slim `explorer.json` (filters, charts, PTT, competitor family unions). `scripts/build_pages.sh` runs analyze then `marimo export html-wasm` into `docs/explore/` (gitignored; built on deploy).
+
+## 2026-09-13
+
 - PNGs moved out of git: `docs/figures/*.png` gitignored; Pages workflow regenerates charts on every deploy and deploys `docs/index.html` gallery with a build timestamp. Citation/analysis JSON still committed.
 
 ## 2026-09-13
