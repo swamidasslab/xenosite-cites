@@ -15,7 +15,7 @@
         "model",
         "sites"
       ],
-      "n_papers": 100,
+      "n_papers": 99,
       "topic_id": 0
     },
     {
@@ -33,7 +33,7 @@
         "chemical",
         "models"
       ],
-      "n_papers": 80,
+      "n_papers": 81,
       "topic_id": 1
     },
     {
@@ -48,10 +48,10 @@
         "simulations",
         "inhibitors",
         "dynamics",
-        "protein",
-        "admet"
+        "admet",
+        "using"
       ],
-      "n_papers": 117,
+      "n_papers": 113,
       "topic_id": 2
     },
     {
@@ -69,7 +69,7 @@
         "data",
         "review"
       ],
-      "n_papers": 81,
+      "n_papers": 82,
       "topic_id": 3
     },
     {
@@ -101,11 +101,11 @@
         "compounds",
         "cancer",
         "novel",
+        "compound",
         "sq109",
-        "structure",
-        "anticancer activity"
+        "structure"
       ],
-      "n_papers": 188,
+      "n_papers": 189,
       "topic_id": 5
     },
     {
@@ -141,7 +141,7 @@
         "distribution metabolism",
         "absorption distribution"
       ],
-      "n_papers": 37,
+      "n_papers": 39,
       "topic_id": 7
     }
   ]

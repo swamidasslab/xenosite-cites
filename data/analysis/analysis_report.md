@@ -44,14 +44,14 @@ Simple abstract/title detector for papers that **use a XenoSite-family tool to m
 
 ## Topics
 
-- **T0** (n=100): metabolism, prediction, models, som, p450, drug, cyp, site
-- **T1** (n=80): deep, deep learning, neural, learning, networks, network, neural networks, neural network
-- **T2** (n=117): molecular, docking, molecular docking, compounds, binding, potential, study, simulations
-- **T3** (n=81): drug, discovery, ai, drug discovery, artificial, intelligence, artificial intelligence, design
+- **T0** (n=99): metabolism, prediction, models, som, p450, drug, cyp, site
+- **T1** (n=81): deep, deep learning, neural, learning, networks, network, neural networks, neural network
+- **T2** (n=113): molecular, docking, molecular docking, compounds, binding, potential, study, simulations
+- **T3** (n=82): drug, discovery, ai, drug discovery, artificial, intelligence, artificial intelligence, design
 - **T4** (n=80): metabolites, ms, vitro, mass, vivo, mass spectrometry, spectrometry, reactive
-- **T5** (n=188): activity, synthesis, cell, cells, anticancer, derivatives, compounds, cancer
+- **T5** (n=189): activity, synthesis, cell, cells, anticancer, derivatives, compounds, cancer
 - **T6** (n=64): learning, machine, machine learning, small, ml, prediction, quantum, molecules
-- **T7** (n=37): adme, adme profile, silico, profile, forensic, excretion, metabolism excretion, cas
+- **T7** (n=39): adme, adme profile, silico, profile, forensic, excretion, metabolism excretion, cas
 
 ## Figures
 

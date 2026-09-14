@@ -1,0 +1,133 @@
+{
+  "full_refresh": true,
+  "last_success_utc": "2026-09-14T19:12:24.957060Z",
+  "n_added_total": 0,
+  "n_files_written": 1,
+  "n_seeds": 17,
+  "n_updated_total": 1,
+  "overlap_days": 14,
+  "seeds": {
+    "dang-2016-ugt": {
+      "n_added": 0,
+      "n_citing": 85,
+      "n_existing": 85,
+      "n_fetched": 85,
+      "n_updated": 0
+    },
+    "dang-2017-casa": {
+      "n_added": 0,
+      "n_citing": 42,
+      "n_existing": 42,
+      "n_fetched": 42,
+      "n_updated": 1
+    },
+    "dang-2018-n-dealkylation": {
+      "n_added": 0,
+      "n_citing": 55,
+      "n_existing": 55,
+      "n_fetched": 55,
+      "n_updated": 0
+    },
+    "dang-2020-metabolic-rainbow": {
+      "n_added": 0,
+      "n_citing": 67,
+      "n_existing": 67,
+      "n_fetched": 67,
+      "n_updated": 0
+    },
+    "flynn-2020-xenonet": {
+      "n_added": 0,
+      "n_citing": 20,
+      "n_existing": 20,
+      "n_fetched": 20,
+      "n_updated": 0
+    },
+    "flynn-2023-mpnn-authenticity": {
+      "n_added": 0,
+      "n_citing": 9,
+      "n_existing": 9,
+      "n_fetched": 9,
+      "n_updated": 0
+    },
+    "hughes-2015-epoxidation": {
+      "n_added": 0,
+      "n_citing": 203,
+      "n_existing": 203,
+      "n_fetched": 203,
+      "n_updated": 0
+    },
+    "hughes-2015-gsh-reactivity": {
+      "n_added": 0,
+      "n_citing": 104,
+      "n_existing": 104,
+      "n_fetched": 104,
+      "n_updated": 0
+    },
+    "hughes-2016-macromolecule-reactivity": {
+      "n_added": 0,
+      "n_citing": 105,
+      "n_existing": 105,
+      "n_fetched": 105,
+      "n_updated": 0
+    },
+    "hughes-2017-quinone": {
+      "n_added": 0,
+      "n_citing": 82,
+      "n_existing": 82,
+      "n_fetched": 82,
+      "n_updated": 0
+    },
+    "hughes-2020-metabolic-forest": {
+      "n_added": 0,
+      "n_citing": 19,
+      "n_existing": 19,
+      "n_fetched": 19,
+      "n_updated": 0
+    },
+    "hughes-2021-bioactivation": {
+      "n_added": 0,
+      "n_citing": 24,
+      "n_existing": 24,
+      "n_fetched": 24,
+      "n_updated": 0
+    },
+    "matlock-2015-xenosite-server": {
+      "n_added": 0,
+      "n_citing": 102,
+      "n_existing": 102,
+      "n_fetched": 102,
+      "n_updated": 0
+    },
+    "matlock-2018-promiscuous-reactivity": {
+      "n_added": 0,
+      "n_citing": 43,
+      "n_existing": 43,
+      "n_fetched": 43,
+      "n_updated": 0
+    },
+    "zaretzki-2012-rs-webpredictor": {
+      "n_added": 0,
+      "n_citing": 68,
+      "n_existing": 68,
+      "n_fetched": 68,
+      "n_updated": 0
+    },
+    "zaretzki-2013-xenosite": {
+      "n_added": 0,
+      "n_citing": 224,
+      "n_existing": 224,
+      "n_fetched": 224,
+      "n_updated": 0
+    },
+    "zaretzki-2015-xenosite-regions": {
+      "n_added": 0,
+      "n_citing": 16,
+      "n_existing": 16,
+      "n_fetched": 16,
+      "n_updated": 0
+    }
+  },
+  "since_created_date": null,
+  "started_utc": "2026-09-14T19:12:02.219263Z",
+  "update_volatile": false
+}
