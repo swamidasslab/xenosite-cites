@@ -51,6 +51,9 @@ workflow = [
     "snakemake>=8.0",
     "matplotlib>=3.8",
     "scikit-learn>=1.4",
+    "marimo>=0.24.2",
+    "altair>=6.2.2",
+    "pandas>=3.0.5",
 ]
 
 [tool.hatch.version]
