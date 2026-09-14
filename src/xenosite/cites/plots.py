@@ -66,9 +66,7 @@ def plot_citations_by_year(
     return writer.save("citations_by_year.png", data, fig)
 
 
-def plot_top_venues(
-    papers: list[dict[str, Any]], writer: FigureWriter, *, top_n: int = 15
-) -> bool:
+def plot_top_venues(papers: list[dict[str, Any]], writer: FigureWriter, *, top_n: int = 15) -> bool:
     venues = Counter(p.get("venue") for p in _citing(papers) if p.get("venue"))
     top = venues.most_common(top_n)
     labels = [v for v, _ in top][::-1]

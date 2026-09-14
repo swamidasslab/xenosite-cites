@@ -239,9 +239,7 @@ def update_citations(
                 flush=True,
             )
             incoming: list[dict[str, Any]] = []
-            for work in client.iter_citing_works(
-                openalex_id, from_created_date=since_date
-            ):
+            for work in client.iter_citing_works(openalex_id, from_created_date=since_date):
                 row = work_record(work)
                 row["cites_seed_id"] = seed.id
                 row["cites_seed_openalex_id"] = openalex_id
@@ -284,8 +282,7 @@ def update_citations(
     # Manifest always records the run clock; that is intentional churn.
     write_json_if_changed(manifest_path, manifest)
     print(
-        f"[update] done; added={total_added} updated={total_updated} "
-        f"files_written={files_written}",
+        f"[update] done; added={total_added} updated={total_updated} files_written={files_written}",
         flush=True,
     )
     return manifest

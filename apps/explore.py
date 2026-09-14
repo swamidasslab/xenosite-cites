@@ -51,9 +51,9 @@ def _(data, mo):
 Interactive view of OpenAlex citing papers for the XenoSite-family seed set.
 Filters update charts and tables from the analysis payload served with this page.
 
-- Citing papers: **{data['analysis'].get('n_citing', '—')}**
-- Topics: **{len(data['analysis'].get('topics') or [])}**
-- Predict-then-test high+medium: **{data['analysis'].get('n_predict_then_test_high_medium', '—')}**
+- Citing papers: **{data["analysis"].get("n_citing", "—")}**
+- Topics: **{len(data["analysis"].get("topics") or [])}**
+- Predict-then-test high+medium: **{data["analysis"].get("n_predict_then_test_high_medium", "—")}**
 """
     )
     return
@@ -71,9 +71,7 @@ def _(data, pd):
         for t in topics
         if t.get("topic_id") is not None
     }
-    class_labels = sorted(
-        {c for c in citing["class_label"].dropna().astype(str).unique().tolist()}
-    )
+    class_labels = sorted({c for c in citing["class_label"].dropna().astype(str).unique().tolist()})
     years = citing["year"].dropna().astype(int)
     year_min = int(years.min()) if len(years) else 2010
     year_max = int(years.max()) if len(years) else 2026
@@ -155,9 +153,7 @@ def _(
     if seed_filter.value != "(any)":
         sid = seed_filter.value
         filtered = filtered[
-            filtered["cites_seed_ids"].map(
-                lambda val: isinstance(val, list) and sid in val
-            )
+            filtered["cites_seed_ids"].map(lambda val: isinstance(val, list) and sid in val)
         ]
     if ptt_filter.value != "(any)":
         conf = filtered["predict_then_test_confidence"].fillna("none").astype(str)

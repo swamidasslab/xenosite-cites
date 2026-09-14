@@ -3,9 +3,7 @@ from xenosite.cites.predict_then_test import score_predict_then_test
 
 def test_high_confidence_brexpiprazole_style() -> None:
     paper = {
-        "title": (
-            "In silico, in vitro and in vivo metabolite identification of brexpiprazole"
-        ),
+        "title": ("In silico, in vitro and in vivo metabolite identification of brexpiprazole"),
         "abstract": (
             "Firstly, the site of metabolism for brexpiprazole was predicted by a "
             "Xenosite web predictor model. Secondly, in vitro metabolite profiling was "
