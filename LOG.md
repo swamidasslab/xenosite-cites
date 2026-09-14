@@ -2,8 +2,7 @@
 
 ## 2026-09-13
 
-- PNGs moved out of git: `docs/figures/*.png` gitignored; Pages workflow regenerates charts and deploys `docs/index.html` gallery. Citation/analysis JSON still committed.
-- FigureWriter still skips rewriting local PNGs when plot-data fingerprints match (local convenience only).
+- PNGs moved out of git: `docs/figures/*.png` gitignored; Pages workflow regenerates charts on every deploy and deploys `docs/index.html` gallery with a build timestamp. Citation/analysis JSON still committed.
 
 ## 2026-09-13
 

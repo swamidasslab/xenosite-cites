@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -15,65 +13,23 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.figure import Figure  # noqa: E402
 
 
-def figure_data_fingerprint(data: Any) -> str:
-    """Stable hash of the series / labels that drive a plot."""
-    blob = json.dumps(data, sort_keys=True, separators=(",", ":"), default=str).encode()
-    return hashlib.sha256(blob).hexdigest()
-
-
 class FigureWriter:
-    """Write PNGs only when plot data fingerprints change."""
+    """Always write PNGs under ``fig_dir`` (rebuild on every analyze/Pages run)."""
 
     def __init__(self, fig_dir: Path) -> None:
         self.fig_dir = fig_dir
-        self.manifest_path = fig_dir / "manifest.json"
-        self.manifest: dict[str, str] = {}
         self.n_written = 0
-        self._dirty = False
-        if self.manifest_path.exists():
-            payload = json.loads(self.manifest_path.read_text(encoding="utf-8"))
-            figures = payload.get("figures") or {}
-            if isinstance(figures, dict):
-                self.manifest = {str(k): str(v) for k, v in figures.items()}
 
-    def save(self, name: str, data: Any, fig: Any, *, dpi: int = 150) -> bool:
-        """Save ``name`` under ``fig_dir`` unless data fingerprint matches.
-
-        If the PNG exists but has no manifest entry yet, record the fingerprint
-        and keep the on-disk image (bootstrap; avoids one-time churn).
-        """
+    def save(self, name: str, data: Any, fig: Any, *, dpi: int = 150) -> bool:  # noqa: ARG002
         path = self.fig_dir / name
-        fp = figure_data_fingerprint(data)
-        prior = self.manifest.get(name)
-        if prior == fp and path.exists():
-            self._close(fig)
-            return False
-        if prior is None and path.exists():
-            self._close(fig)
-            self.manifest[name] = fp
-            self._dirty = True
-            return False
         self.fig_dir.mkdir(parents=True, exist_ok=True)
         fig.savefig(path, dpi=dpi)
         self._close(fig)
-        self.manifest[name] = fp
-        self._dirty = True
         self.n_written += 1
         return True
 
     def flush(self) -> bool:
-        """Persist manifest if changed. Return True if the file was written."""
-        if not self._dirty and self.manifest_path.exists():
-            return False
-        self.fig_dir.mkdir(parents=True, exist_ok=True)
-        payload = {"figures": dict(sorted(self.manifest.items())), "version": 1}
-        text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-        if self.manifest_path.exists() and self.manifest_path.read_text(encoding="utf-8") == text:
-            self._dirty = False
-            return False
-        self.manifest_path.write_text(text, encoding="utf-8")
-        self._dirty = False
-        return True
+        return False
 
     @staticmethod
     def _close(fig: Any) -> None:

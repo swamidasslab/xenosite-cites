@@ -1,9 +1,10 @@
 artifacts/*.log
 artifacts/**/*.log
 artifacts/analysis/
-# Figures are built in the Pages deploy, not committed.
+# Figures are built on every Pages/analyze run, not committed.
 docs/figures/*.png
 docs/figures/manifest.json
+docs/build-info.json
 .snakemake/
 uv.lock
 .python-version

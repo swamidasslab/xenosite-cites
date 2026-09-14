@@ -255,11 +255,7 @@ def cmd_analyze(args: argparse.Namespace) -> None:
         fig_writer,
     )
     fig_writer.flush()
-    print(
-        f"[analyze] figures written={fig_writer.n_written} "
-        f"(skipped unchanged plot data)",
-        flush=True,
-    )
+    print(f"[analyze] figures written={fig_writer.n_written}", flush=True)
 
     art_fig = out_dir / "figures"
     art_fig.mkdir(parents=True, exist_ok=True)
