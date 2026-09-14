@@ -145,6 +145,11 @@ def cmd_build_graph(args: argparse.Namespace) -> None:
 def cmd_analyze(args: argparse.Namespace) -> None:
     from xenosite.cites import plots
     from xenosite.cites.classify import classify_paper
+    from xenosite.cites.explorer import (
+        build_explorer_payload,
+        load_competitors,
+        write_explorer_payload,
+    )
     from xenosite.cites.predict_then_test import score_predict_then_test
     from xenosite.cites.topics import fit_topics
 
@@ -330,6 +335,22 @@ def cmd_analyze(args: argparse.Namespace) -> None:
     (data_dir / "analysis_report.md").write_text(report, encoding="utf-8")
     (out_dir / "analysis_report.md").write_text(report, encoding="utf-8")
 
+    competitors = load_competitors(Path(args.competitors))
+    explorer = build_explorer_payload(
+        papers=papers,
+        summary=summary,
+        analysis_summary=analysis_summary,
+        classifications=classifications,
+        predict_then_test=predict_then_test_rows,
+        competitors=competitors,
+    )
+    write_explorer_payload(
+        explorer,
+        data_dir / "explorer.json",
+        out_dir / "explorer.json",
+        Path(args.explorer_public),
+    )
+
 
 def cmd_update_citations(args: argparse.Namespace) -> None:
     from xenosite.cites.update import update_citations
@@ -375,6 +396,16 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--out-dir", default="artifacts/analysis")
     analyze.add_argument("--figures-dir", default="docs/figures")
     analyze.add_argument("--data-dir", default="data/analysis")
+    analyze.add_argument(
+        "--explorer-public",
+        default="apps/public/explorer.json",
+        help="Marimo public/ copy of the explorer payload",
+    )
+    analyze.add_argument(
+        "--competitors",
+        default="data/competitors.json",
+        help="Optional competitor-family unique-citer summary JSON",
+    )
     analyze.add_argument("--n-topics", type=int, default=8)
     analyze.set_defaults(func=cmd_analyze)
 

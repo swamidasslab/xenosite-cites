@@ -55,5 +55,5 @@ Simple abstract/title detector for papers that **use a XenoSite-family tool to m
 
 ## Figures
 
-See `docs/figures/` (committed) and `artifacts/analysis/figures/`.
+See `docs/figures/` (gitignored locally; built on GitHub Pages deploy).
 

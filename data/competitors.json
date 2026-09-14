@@ -1,0 +1,78 @@
+{
+  "source": "OpenAlex unique citing-work unions (2026-09-13); XenoSite from local papers.jsonl",
+  "metric": "unique_citing_papers_across_seed_set",
+  "families": [
+    {
+      "family": "XenoSite",
+      "n_seeds": 17,
+      "unique_citers": 777,
+      "sum_seed_cited_by": 1317,
+      "niche": "SOM + reactivity + metabolites",
+      "notes": "Full XenoSite-family suite"
+    },
+    {
+      "family": "BioTransformer",
+      "n_seeds": 1,
+      "unique_citers": 509,
+      "sum_seed_cited_by": 531,
+      "niche": "Metabolite structures",
+      "notes": "Adjacent task; single method paper"
+    },
+    {
+      "family": "SMARTCyp",
+      "n_seeds": 4,
+      "unique_citers": 485,
+      "sum_seed_cited_by": 626,
+      "niche": "CYP SOM",
+      "notes": "2010 + server + 2.0 + 3.0"
+    },
+    {
+      "family": "MetaSite",
+      "n_seeds": 1,
+      "unique_citers": 482,
+      "sum_seed_cited_by": 496,
+      "niche": "CYP SOM",
+      "notes": "Commercial; one canonical method paper"
+    },
+    {
+      "family": "FAME + GLORY",
+      "n_seeds": 5,
+      "unique_citers": 344,
+      "sum_seed_cited_by": 500,
+      "niche": "SOM + metabolite enumeration",
+      "notes": "FAME 1-3 + GLORY + GLORYx"
+    },
+    {
+      "family": "SyGMa",
+      "n_seeds": 1,
+      "unique_citers": 159,
+      "sum_seed_cited_by": 184,
+      "niche": "Metabolite structures",
+      "notes": "Rule-based enumeration"
+    },
+    {
+      "family": "CypReact + CyProduct",
+      "n_seeds": 2,
+      "unique_citers": 111,
+      "sum_seed_cited_by": 128,
+      "niche": "CYP reactant / products",
+      "notes": "Related CYP ML tools"
+    },
+    {
+      "family": "SOMP",
+      "n_seeds": 1,
+      "unique_citers": 108,
+      "sum_seed_cited_by": 125,
+      "niche": "CYP SOM",
+      "notes": "Way2Drug / PASS"
+    },
+    {
+      "family": "CypScore",
+      "n_seeds": 1,
+      "unique_citers": 78,
+      "sum_seed_cited_by": 92,
+      "niche": "CYP reactivity",
+      "notes": "Older reactivity scores"
+    }
+  ]
+}
